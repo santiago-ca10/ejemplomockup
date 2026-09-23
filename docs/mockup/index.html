@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Manta Link — Mockup web</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#2E5D45; --green-deep:#1F4433; --gold:#C79A3B;
+    --bg:#FBF8F2; --panel:#FFFFFF; --ink:#26241F; --ink-soft:#66604F; --line:#E4DDC9;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --bg:#1B1912; --panel:#242019; --ink:#F1ECDE; --ink-soft:#B9B1A0; --line:#3A3527; }
+  }
+  :root[data-theme="dark"]{ --bg:#1B1912; --panel:#242019; --ink:#F1ECDE; --ink-soft:#B9B1A0; --line:#3A3527; }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:'Public Sans',system-ui,sans-serif;
+       padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);}
+  h1,h2,h3{font-family:'Fraunces',serif; margin:0;}
+  a,button{font-family:inherit;}
+  header{position:sticky; top:0; z-index:30; background:var(--panel); border-bottom:1px solid var(--line);
+         padding:calc(12px + env(safe-area-inset-top,0px)) 20px 12px;}
+  .headrow{max-width:1080px; margin:0 auto; display:flex; align-items:center; gap:18px; flex-wrap:wrap;}
+  .logo{font-size:1.3rem; font-weight:700; color:var(--green); cursor:pointer; flex:0 0 auto;}
+  .logo span{color:var(--gold);}
+  nav.mainnav{display:flex; gap:4px; margin-left:auto; flex-wrap:wrap;}
+  nav.mainnav button{background:none; border:none; padding:9px 12px; border-radius:9px; font:600 .88rem 'Public Sans'; color:var(--ink-soft); cursor:pointer;}
+  nav.mainnav button.active{background:#EAF1EC; color:var(--green);}
+  .btn{border:none; border-radius:10px; padding:11px 18px; font:700 .87rem 'Public Sans'; cursor:pointer; display:inline-flex; align-items:center; gap:8px;}
+  .btn-primary{background:var(--green); color:#fff;}
+  .btn-primary:hover{background:var(--green-deep);}
+  .btn-outline{background:transparent; color:var(--green); border:1.5px solid var(--green);}
+  main{max-width:1080px; margin:0 auto; padding:26px 20px 60px;}
+  .screen{display:none;}
+  .screen.active{display:block;}
+  .hero{text-align:center; padding:10px 0 26px;}
+  .hero h2{font-size:1.7rem; line-height:1.25; max-width:20ch; margin:0 auto 14px;}
+  .searchbar{display:flex; gap:10px; max-width:640px; margin:0 auto; flex-wrap:wrap;}
+  .searchbar input{flex:1 1 220px; padding:13px 16px; border:1.5px solid var(--line); border-radius:12px; font-size:1rem; background:var(--panel); color:var(--ink);}
+  .searchbar select{padding:13px 14px; border:1.5px solid var(--line); border-radius:12px; background:var(--panel); color:var(--ink); font:600 .88rem 'Public Sans';}
+  .chips{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:18px;}
+  .chip{border:1.5px solid var(--line); background:var(--panel); color:var(--ink-soft); padding:8px 15px; border-radius:999px; font:600 .82rem 'Public Sans'; cursor:pointer;}
+  .chip.active{border-color:var(--green); color:var(--green); background:#EAF1EC;}
+  .section-title{display:flex; justify-content:space-between; align-items:baseline; margin:32px 0 14px;}
+  .section-title h3{font-size:1.15rem;}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px;}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; cursor:pointer; transition:border-color .15s ease, transform .15s ease;}
+  .card:hover{border-color:var(--green); transform:translateY(-2px);}
+  .card img{width:100%; height:140px; object-fit:cover; display:block; background:var(--line);}
+  .card .body{padding:14px;}
+  .card h4{font-size:1rem; margin-bottom:3px;}
+  .seller{color:var(--ink-soft); font-size:.82rem; margin-bottom:6px;}
+  .rating{color:var(--gold); font-size:.82rem; font-weight:700; margin-bottom:10px;}
+  .card .btn{width:100%; justify-content:center;}
+  .price{font-weight:700; color:var(--green-deep); font-size:1.05rem;}
+  .back{color:var(--green); font-weight:700; font-size:.85rem; cursor:pointer; display:inline-block; margin-bottom:16px;}
+  .detail{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+  @media (max-width:640px){.detail{grid-template-columns:1fr;}}
+  .detail img{width:100%; border-radius:16px; object-fit:cover; height:280px; background:var(--line);}
+  .seller-box{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px; display:flex; gap:12px; align-items:center; margin:16px 0;}
+  .avatar{width:44px; height:44px; border-radius:50%; background:var(--green); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700;}
+  .contact-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;}
+  .authbox{max-width:420px; margin:20px auto; background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:28px;}
+  .field{margin-bottom:14px;}
+  .field label{display:block; font-size:.82rem; font-weight:600; margin-bottom:5px; color:var(--ink-soft);}
+  .field input{width:100%; padding:11px 12px; border:1px solid var(--line); border-radius:10px; background:var(--bg); color:var(--ink);}
+  .link{color:var(--green); font-weight:600; cursor:pointer;}
+  .sell-cta{border:2px dashed var(--green); border-radius:14px; padding:26px; text-align:center; margin-bottom:20px; cursor:pointer; background:#EAF1EC;}
+  .sell-cta strong{color:var(--green-deep); font-size:1.05rem;}
+  .list-row{display:flex; justify-content:space-between; align-items:center; gap:12px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px 16px; margin-bottom:10px;}
+  .help-item{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px; margin-bottom:12px;}
+  .help-item h4{margin-bottom:6px; color:var(--green-deep);}
+  .toast{position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--green-deep); color:#fff; padding:12px 20px; border-radius:10px; font:600 .85rem 'Public Sans'; opacity:0; transition:all .25s ease; z-index:40;}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="headrow">
+    <div class="logo" onclick="ir('inicio')">Manta<span>Link</span></div>
+    <nav class="mainnav" id="mainnav">
+      <button data-s="inicio" class="active">Inicio</button>
+      <button data-s="vender">Vender</button>
+      <button data-s="ayuda">Ayuda</button>
+      <button data-s="login">Ingresar</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- INICIO -->
+  <section class="screen active" id="inicio">
+    <div class="hero">
+      <h2>¿Qué necesitas encontrar hoy en Manta?</h2>
+      <div class="searchbar">
+        <input id="buscador" placeholder="Buscar producto o servicio…">
+        <select id="filtro">
+          <option value="">Todas las categorías</option>
+          <option>Alimentos</option>
+          <option>Artesanías</option>
+          <option>Turismo</option>
+          <option>Servicios</option>
+        </select>
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="section-title"><h3>Destacados esta semana</h3></div>
+    <div class="grid" id="grid-productos"></div>
+  </section>
+
+  <!-- DETALLE -->
+  <section class="screen" id="detalle">
+    <span class="back" onclick="ir('inicio')">← Volver al catálogo</span>
+    <div class="detail" id="detalle-body"></div>
+  </section>
+
+  <!-- LOGIN -->
+  <section class="screen" id="login">
+    <div class="authbox">
+      <h3 style="margin-bottom:6px">Ingresar a tu cuenta</h3>
+      <p style="color:var(--ink-soft); font-size:.88rem; margin:0 0 18px">Para publicar y gestionar tus productos.</p>
+      <div class="field"><label>Correo o teléfono</label><input placeholder="ana@correo.com"></div>
+      <div class="field"><label>Contraseña</label><input type="password" placeholder="••••••••"></div>
+      <button class="btn btn-primary" style="width:100%; justify-content:center" onclick="ir('vender')">Ingresar</button>
+      <p style="text-align:center; margin-top:14px; font-size:.85rem">
+        <span class="link" onclick="toast('Se enviaría un enlace de recuperación a tu correo')">¿Olvidaste tu contraseña?</span>
+      </p>
+      <p style="text-align:center; margin-top:6px; font-size:.85rem">¿No tienes cuenta? <span class="link" onclick="ir('registro')">Regístrate aquí</span></p>
+    </div>
+  </section>
+
+  <!-- REGISTRO -->
+  <section class="screen" id="registro">
+    <div class="authbox">
+      <h3 style="margin-bottom:6px">Crear tu cuenta</h3>
+      <p style="color:var(--ink-soft); font-size:.88rem; margin:0 0 18px">Solo lo necesario para empezar a vender.</p>
+      <div class="field"><label>Nombre completo</label><input placeholder="Ana Pérez"></div>
+      <div class="field"><label>Correo electrónico o teléfono</label><input placeholder="ana@correo.com"></div>
+      <div class="field"><label>Contraseña</label><input type="password" placeholder="••••••••"></div>
+      <div class="field"><label>Confirmar contraseña</label><input type="password" placeholder="••••••••"></div>
+      <p style="font-size:.78rem; color:var(--ink-soft); margin:-6px 0 14px">Guardamos tu correo o teléfono solo para ayudarte a recuperar tu cuenta si la olvidas.</p>
+      <button class="btn btn-primary" style="width:100%; justify-content:center" onclick="ir('vender')">Crear cuenta</button>
+    </div>
+  </section>
+
+  <!-- VENDER -->
+  <section class="screen" id="vender">
+    <div class="section-title"><h3>Mis productos</h3></div>
+    <div class="sell-cta" onclick="toast('Aquí se abriría el formulario para publicar')">
+      <strong>+ Vender producto</strong>
+      <p style="color:var(--ink-soft); font-size:.85rem; margin:6px 0 0">Publica lo que ofreces en menos de un minuto.</p>
+    </div>
+    <div id="lista-mis-productos"></div>
+  </section>
+
+  <!-- AYUDA -->
+  <section class="screen" id="ayuda">
+    <div class="section-title"><h3>Centro de ayuda</h3></div>
+    <div class="help-item"><h4>¿Cómo publico un producto?</h4><p style="margin:0; color:var(--ink-soft)">Entra a "Vender", toca "+ Vender producto" y completa nombre, foto, precio y tu contacto.</p></div>
+    <div class="help-item"><h4>¿Cómo contacto a un vendedor?</h4><p style="margin:0; color:var(--ink-soft)">Abre el producto que te interesa y usa el botón "Contactar por WhatsApp" o "Llamar al productor".</p></div>
+    <div class="help-item"><h4>¿Manta Link cobra alguna comisión?</h4><p style="margin:0; color:var(--ink-soft)">No. El portal solo conecta a compradores y vendedores; el acuerdo de venta se hace directamente entre ustedes.</p></div>
+  </section>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const productos = [
+  {id:1, nombre:"Panela orgánica", categoria:"Alimentos", vendedor:"Trapiche La Esperanza", rating:"★ 4.8", precio:"$8.000 libra", img:"https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&q=80&w=500", desc:"Panela artesanal molida en trapiche familiar, sin químicos añadidos."},
+  {id:2, nombre:"Ruana de lana virgen", categoria:"Artesanías", vendedor:"Doña Rosa Tejidos", rating:"★ 4.9", precio:"$85.000", img:"https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&q=80&w=500", desc:"Tejida a mano con técnicas heredadas de generación en generación. Abrigo garantizado para el clima frío."},
+  {id:3, nombre:"Recorrido a la cascada", categoria:"Turismo", vendedor:"Guías Manta Rural", rating:"★ 4.7", precio:"$15.000 p/persona", img:"https://images.unsplash.com/photo-1508459855340-fb63ac591728?auto=format&fit=crop&q=80&w=500", desc:"Caminata ecológica de 2 horas con guía certificado, incluye refrigerio campesino."},
+  {id:4, nombre:"Transporte veredal", categoria:"Servicios", vendedor:"Don Efraín", rating:"★ 4.6", precio:"Según destino", img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=500", desc:"Servicio de transporte entre veredas y casco urbano, disponible todos los días."},
+];
+const categorias = ["Todos","Alimentos","Artesanías","Turismo","Servicios"];
+let categoriaActiva = "Todos";
+
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+document.getElementById('chips').innerHTML = categorias.map(c=>
+  `<button class="chip ${c==='Todos'?'active':''}" data-c="${c}">${c}</button>`).join('');
+
+document.getElementById('mainnav').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  ir(b.dataset.s);
+});
+document.getElementById('chips').addEventListener('click', e=>{
+  const b = e.target.closest('.chip'); if(!b) return;
+  categoriaActiva = b.dataset.c;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c===b));
+  renderCatalogo();
+});
+document.getElementById('buscador').addEventListener('input', renderCatalogo);
+document.getElementById('filtro').addEventListener('change', e=>{
+  categoriaActiva = e.target.value || "Todos";
+  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c.dataset.c===categoriaActiva));
+  renderCatalogo();
+});
+
+function ir(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active', s.id===id));
+  document.querySelectorAll('.mainnav button').forEach(b=>b.classList.toggle('active', b.dataset.s===id));
+  if(id==='vender') renderMisProductos();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function renderCatalogo(){
+  const texto = document.getElementById('buscador').value.toLowerCase();
+  const visibles = productos.filter(p =>
+    (categoriaActiva==='Todos' || p.categoria===categoriaActiva) &&
+    p.nombre.toLowerCase().includes(texto));
+  const grid = document.getElementById('grid-productos');
+  grid.innerHTML = visibles.length ? visibles.map(p=>`
+    <div class="card" onclick="verDetalle(${p.id})">
+      <img src="${p.img}" alt="">
+      <div class="body">
+        <h4>${p.nombre}</h4>
+        <div class="seller">${p.vendedor}</div>
+        <div class="rating">${p.rating}</div>
+        <button class="btn btn-outline">Más información</button>
+      </div>
+    </div>`).join('') : `<p style="color:var(--ink-soft); font-style:italic">No encontramos resultados para tu búsqueda.</p>`;
+}
+
+function verDetalle(id){
+  const p = productos.find(x=>x.id===id);
+  document.getElementById('detalle-body').innerHTML = `
+    <img src="${p.img}" alt="">
+    <div>
+      <h2>${p.nombre}</h2>
+      <div class="price" style="margin-top:6px">${p.precio}</div>
+      <p style="color:var(--ink-soft); line-height:1.55; margin-top:14px">${p.desc}</p>
+      <div class="seller-box">
+        <div class="avatar">${p.vendedor.charAt(0)}</div>
+        <div><strong>${p.vendedor}</strong><div style="font-size:.82rem; color:var(--ink-soft)">${p.categoria} · Manta</div></div>
+      </div>
+      <div class="contact-row">
+        <button class="btn btn-primary" onclick="toast('Se abriría WhatsApp con el vendedor')">Contactar por WhatsApp</button>
+        <button class="btn btn-outline" onclick="toast('Se iniciaría una llamada')">Llamar al productor</button>
+      </div>
+    </div>`;
+  ir('detalle');
+}
+
+function renderMisProductos(){
+  document.getElementById('lista-mis-productos').innerHTML = productos.slice(0,2).map(p=>`
+    <div class="list-row">
+      <div><strong>${p.nombre}</strong><div style="font-size:.82rem; color:var(--ink-soft)">${p.categoria} · ${p.precio}</div></div>
+      <button class="btn btn-outline" onclick="toast('Aquí podrías editar este producto')">Editar</button>
+    </div>`).join('');
+}
+
+renderCatalogo();
+</script>
+</body>
+</html>
