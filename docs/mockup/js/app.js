@@ -11,24 +11,28 @@ let categoriaActiva = "Todos";
 let sesionActiva = false;
 
 const I18N = {
-  es:{navInicio:"Inicio",navServicios:"Servicios",navAyuda:"? Ayuda",navVender:"Vender",navPerfil:"Perfil",navIngresar:"Ingresar",
+  es:{navInicio:"Inicio",navServicios:"Servicios",navAyuda:"? Ayuda",navVender:"Publicar",navPerfil:"Perfil",navIngresar:"Ingresar",
       heroTitle:"¿Qué necesitas encontrar hoy en Manta?",buscarPh:"Buscar producto o servicio…",
-      destacados:"Destacados esta semana",misProductos:"Mis productos",volver:"← Volver al catálogo",
+      destacados:"Destacados esta semana",misProductos:"Mis publicaciones",volver:"← Volver al catálogo",
       serviciosTitle:"Servicios comunitarios",serviciosDesc:"Además de productos, en MantaLink puedes ofrecer o encontrar servicios como transporte, talleres y hospedaje rural.",
       ayudaTitle:"Centro de ayuda",loginTitle:"Ingresar a tu cuenta",loginDesc:"Para publicar y gestionar tus productos.",
       cerrarSesion:"Cerrar sesión",cfgTitle:"Configuración",cfgTheme:"Tema de color",cfgThemeManta:"Manta (predeterminado)",
       cfgThemeOscuro:"Modo oscuro",cfgThemeClasico:"Verde clásico",cfgTextSize:"Tamaño de letra",cfgNormal:"Normal",
       cfgGrande:"Grande (adultos mayores)",cfgLang:"Idioma",skipLink:"Saltar al contenido",
+      cfgA11y:"Accesibilidad",cfgA11yFab:"Botón flotante \"A+\" para agrandar la letra",
+      ctaVender:"+ Publicar producto o servicio",ctaVenderSub:"Publica lo que ofreces en menos de un minuto.",
       cfgNote:"Estas preferencias se guardan en este dispositivo. La traducción completa del contenido aún está en desarrollo; por ahora se traduce la navegación principal.",
       soloResidentes:"Debes iniciar sesión (solo habitantes de Manta pueden hacerlo)"},
-  en:{navInicio:"Home",navServicios:"Services",navAyuda:"? Help",navVender:"Sell",navPerfil:"Profile",navIngresar:"Log in",
+  en:{navInicio:"Home",navServicios:"Services",navAyuda:"? Help",navVender:"Publish",navPerfil:"Profile",navIngresar:"Log in",
       heroTitle:"What are you looking for in Manta today?",buscarPh:"Search a product or service…",
-      destacados:"Featured this week",misProductos:"My products",volver:"← Back to catalog",
+      destacados:"Featured this week",misProductos:"My listings",volver:"← Back to catalog",
       serviciosTitle:"Community services",serviciosDesc:"Besides products, MantaLink lets you offer or find services like transport, workshops and rural lodging.",
       ayudaTitle:"Help center",loginTitle:"Log in to your account",loginDesc:"To publish and manage your products.",
       cerrarSesion:"Log out",cfgTitle:"Settings",cfgTheme:"Color theme",cfgThemeManta:"Manta (default)",
       cfgThemeOscuro:"Dark mode",cfgThemeClasico:"Classic green",cfgTextSize:"Text size",cfgNormal:"Normal",
       cfgGrande:"Large (for older adults)",cfgLang:"Language",skipLink:"Skip to content",
+      cfgA11y:"Accessibility",cfgA11yFab:"Floating \"A+\" button to enlarge text",
+      ctaVender:"+ Publish product or service",ctaVenderSub:"Publish what you offer in under a minute.",
       cfgNote:"These preferences are saved on this device. Full content translation is still in progress; for now only the main navigation is translated.",
       soloResidentes:"You must log in (only Manta residents can)"}
 };
@@ -226,6 +230,13 @@ function applyLang(lang){
   document.querySelectorAll('[data-i18n]').forEach(el=>{ if(dict[el.dataset.i18n]) el.textContent = dict[el.dataset.i18n]; });
   document.querySelectorAll('[data-i18n-ph]').forEach(el=>{ if(dict[el.dataset.i18nPh]) el.placeholder = dict[el.dataset.i18nPh]; });
 }
+function applyA11yFabVisible(show){
+  document.getElementById('a11yBtn').hidden = !show;
+  ls('mantalink-a11yfab', show ? '1' : '0');
+  document.getElementById('a11yFabToggle').checked = show;
+}
+document.getElementById('a11yFabToggle').addEventListener('change', e=>applyA11yFabVisible(e.target.checked));
+
 document.querySelectorAll('[data-theme-btn]').forEach(b=>b.addEventListener('click',()=>applyTheme(b.dataset.themeBtn)));
 document.querySelectorAll('[data-size-btn]').forEach(b=>b.addEventListener('click',()=>applyTextSize(b.dataset.sizeBtn)));
 document.querySelectorAll('[data-lang-btn]').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.langBtn)));
@@ -241,6 +252,8 @@ document.getElementById('a11yBtn').addEventListener('click', ()=>{
   applyTheme(ls('mantalink-theme') || 'manta');
   applyTextSize(ls('mantalink-textsize') || 'normal');
   applyLang(ls('mantalink-lang') || 'es');
+  const a11yFabPref = ls('mantalink-a11yfab');
+  applyA11yFabVisible(a11yFabPref === null ? true : a11yFabPref === '1'); // activo por defecto
   sesionActiva = ls('mantalink-sesion') === '1';
   actualizarSesion();
   renderCatalogo();

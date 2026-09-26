@@ -34,6 +34,7 @@
 }
 
 *{box-sizing:border-box;}
+[hidden]{display:none !important;} /* el atributo hidden siempre manda, aunque otra regla ponga display:flex */
 html{scroll-padding-top:calc(48px + env(safe-area-inset-top,0px)); font-size:106%;} /* base ligeramente mayor por accesibilidad */
 html.text-grande{ font-size:135%; }
 body{margin:0; background:var(--bg); color:var(--ink); font-family:'Public Sans',system-ui,sans-serif; line-height:1.5;
@@ -66,6 +67,10 @@ nav.mainnav{display:flex; align-items:center; gap:4px; margin-left:auto; flex-wr
 nav.mainnav button{background:none; border:none; padding:11px 13px; border-radius:9px; font:600 .9rem 'Public Sans'; color:var(--ink-soft); cursor:pointer;}
 nav.mainnav button.active{background:color-mix(in srgb, var(--primary) 14%, transparent); color:var(--primary);}
 nav.mainnav .icon-btn{font-size:1.15rem; padding:10px 13px;}
+.gear-icon{width:21px; height:21px; transition:transform .55s cubic-bezier(.34,1.7,.64,1);}
+.icon-btn:hover .gear-icon, .icon-btn:focus-visible .gear-icon{transform:rotate(80deg);}
+.icon-btn.active .gear-icon{animation:gearSpinIn .6s cubic-bezier(.34,1.7,.64,1);}
+@keyframes gearSpinIn{ from{transform:rotate(0deg) scale(.7);} to{transform:rotate(150deg) scale(1);} }
 .btn{border:none; border-radius:10px; padding:13px 18px; font:700 .92rem 'Public Sans'; cursor:pointer; display:inline-flex; align-items:center; gap:8px; min-height:46px;}
 .btn-primary{background:var(--primary); color:#fff;}
 .btn-primary:hover{background:var(--primary-deep);}
@@ -139,6 +144,25 @@ main{max-width:1080px; margin:0 auto; padding:26px 20px 60px;}
 .seg button{flex:1; padding:13px; border-radius:10px; border:1.5px solid var(--line); background:var(--bg); color:var(--ink); font:600 .9rem 'Public Sans'; cursor:pointer; min-height:46px;}
 .seg button.active{border-color:var(--primary); background:color-mix(in srgb, var(--primary) 12%, transparent); color:var(--primary);}
 .settings-note{font-size:.84rem; color:var(--ink-soft); margin-top:16px;}
+
+/* Animación de entrada al abrir Configuración */
+@keyframes fadeSlideUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+#config.active .settings-card{animation:fadeSlideUp .45s ease both;}
+#config.active .theme-opt{animation:fadeSlideUp .4s ease both;}
+#config.active .theme-opt:nth-child(1){animation-delay:.04s;}
+#config.active .theme-opt:nth-child(2){animation-delay:.1s;}
+#config.active .theme-opt:nth-child(3){animation-delay:.16s;}
+#config.active .seg, #config.active .switch-row{animation:fadeSlideUp .4s ease both; animation-delay:.12s;}
+
+/* Interruptor on/off (botón A+) */
+.switch-row{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:12px 4px; cursor:pointer; font-size:.92rem;}
+.switch-row input{position:absolute; opacity:0; width:1px; height:1px;}
+.switch{flex:0 0 auto; display:inline-block;}
+.switch-track{display:block; width:50px; height:29px; border-radius:999px; background:var(--line); position:relative; transition:background .25s ease;}
+.switch-thumb{position:absolute; top:3px; left:3px; width:23px; height:23px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.3); transition:transform .25s cubic-bezier(.34,1.56,.64,1);}
+.switch-row input:checked + .switch-track{background:var(--primary);}
+.switch-row input:checked + .switch-track .switch-thumb{transform:translateX(21px);}
+.switch-row input:focus-visible + .switch-track{outline:3px solid var(--focus); outline-offset:2px;}
 
 /* Botón flotante de accesibilidad: acceso directo a "letra grande" desde cualquier pantalla */
 .a11y-fab{position:fixed; right:16px; bottom:calc(24px + env(safe-area-inset-bottom,0px)); z-index:41;
