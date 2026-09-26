@@ -1,6 +1,5 @@
 name: Publicar Mockup en GitHub Pages
 
-name: Publicar Mockup en GitHub Pages
 
 on:
   workflow_dispatch:
