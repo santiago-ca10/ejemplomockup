@@ -1,17 +1,22 @@
 const productos = [
-  {id:1, nombre:"Panela orgánica", categoria:"Alimentos", vendedor:"Trapiche La Esperanza", rating:"★ 4.8", precio:"$8.000 libra", img:"https://upra.gov.co/sites/default/files/styles/webp/public/2025-04/La%20panela%20colombiana%20conquista%20paladares%20en%20todo%20el%20mundo.jpg.webp?itok=z5_-ylRC", desc:"Panela artesanal molida en trapiche familiar, sin químicos añadidos."},
-  {id:2, nombre:"Ruana de lana virgen", categoria:"Artesanías", vendedor:"Doña Rosa Tejidos", rating:"★ 4.9", precio:"$85.000", img:"https://static.wixstatic.com/media/478bee_2029d26aec7447bc953625b8c61f0747~mv2.jpg/v1/fill/w_480,h_480,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/478bee_2029d26aec7447bc953625b8c61f0747~mv2.jpg", desc:"Tejida a mano con técnicas heredadas de generación en generación."},
-  {id:3, nombre:"Recorrido a la laguna", categoria:"Turismo", vendedor:"Guías Manta Rural", rating:"★ 4.7", precio:"$15.000 p/persona", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrJwr4f69e0bwk_ItoluDt4Xm3Sp6gwCq2tT5AXt7oa-S0LKVWdeHGSw_8&s=10", desc:"Caminata ecológica de 2 horas con guía certificado, incluye refrigerio campesino."},
+  {id:1, nombre:"Panela orgánica", categoria:"Alimentos", vendedor:"Trapiche enrramada de Bermejal", rating:"★ 4.8", precio:"$8.000 libra", img:"https://upra.gov.co/sites/default/files/styles/webp/public/2025-04/La%20panela%20colombiana%20conquista%20paladares%20en%20todo%20el%20mundo.jpg.webp?itok=z5_-ylRC", desc:"Panela artesanal molida en trapiche familiar, sin químicos añadidos."},
+  {id:2, nombre:"Ruana de lana virgen", categoria:"Artesanías", vendedor:"Doña Rosa Tejidos", rating:"★ 4.9", precio:"$385.000", img:"https://static.wixstatic.com/media/478bee_2029d26aec7447bc953625b8c61f0747~mv2.jpg/v1/fill/w_480,h_480,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/478bee_2029d26aec7447bc953625b8c61f0747~mv2.jpg", desc:"Tejida a mano con técnicas heredadas de generación en generación."},
+  {id:3, nombre:"Recorrido a la laguna", categoria:"Turismo", vendedor:"Guías Manta Rural", rating:"★ 4.7", precio:"$35.000 p/persona", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrJwr4f69e0bwk_ItoluDt4Xm3Sp6gwCq2tT5AXt7oa-S0LKVWdeHGSw_8&s=10", desc:"Caminata ecológica de 2 horas con guía certificado, incluye refrigerio campesino."},
   {id:4, nombre:"Transporte veredal", categoria:"Servicios", vendedor:"Don Efraín", rating:"★ 4.6", precio:"Según destino", img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=500", desc:"Servicio de transporte entre veredas y casco urbano, disponible todos los días."},
-  {id:5, nombre:"Taller de tejido artesanal", categoria:"Servicios", vendedor:"Doña Rosa Tejidos", rating:"★ 4.9", precio:"$25.000", img:"https://images.unsplash.com/photo-1528277342758-f1d7613953a2?auto=format&fit=crop&q=80&w=500", desc:"Taller de 2 horas para aprender técnicas básicas de tejido."},
+  {id:5, nombre:"Taller de tejido artesanal", categoria:"Servicios", vendedor:"Doña Rosa Tejidos", rating:"★ 4.9", precio:"$25.000", img:"https://elpilon2024.s3.us-west-2.amazonaws.com/2024/05/foto-mochila.jpg", desc:"Taller de 2 horas para aprender técnicas básicas de tejido."},
   {id:6, nombre:"Hotel boutique Corazón del Cielo", categoria:"Servicios", vendedor:"Hotel Boutique Corazón del Cielo", rating:"★ 4.8", precio:"$60.000 noche", img:"https://hotelboutiquecorazondelcielo.com/wp-content/uploads/2026/03/39af9076-674b-43e9-9229-490facb7da22-1-768x1024.jpg", desc:"Hospedaje boutique campestre con desayuno incluido, ideal para turistas."},
 ];
 const categorias = ["Todos","Alimentos","Artesanías","Turismo","Servicios"];
 let categoriaActiva = "Todos";
 let sesionActiva = false;
+let ultimaRutaNoDetalle = 'home'; // recuerda si veníamos del catálogo o de servicios, para que "Volver" regrese ahí
+let misPublicaciones = productos.slice(0,2).map(p=>({...p})); // copia editable, independiente del catálogo general
+let idEnEdicion = null;
+let fotoPreviewURL = null;
+const fotoPlaceholderHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h4l2-2h6l2 2h4v13H3z"/><circle cx="12" cy="13" r="4"/></svg><span data-i18n="subirFoto">Toca para subir una foto</span>`;
 
 const I18N = {
-  es:{navInicio:"Inicio",navServicios:"Servicios",navAyuda:"? Ayuda",navVender:"Publicar",navPerfil:"Perfil",navIngresar:"Ingresar",
+  es:{navInicio:"Inicio",navServicios:"Servicios",navAyuda:"Ayuda",navVender:"Publicar",navPerfil:"Perfil",navIngresar:"Ingresar",
       heroTitle:"¿Qué necesitas encontrar hoy en Manta?",buscarPh:"Buscar producto o servicio…",
       destacados:"Destacados esta semana",misProductos:"Mis publicaciones",volver:"← Volver al catálogo",
       serviciosTitle:"Servicios comunitarios",serviciosDesc:"Además de productos, en MantaLink puedes ofrecer o encontrar servicios como transporte, talleres y hospedaje rural.",
@@ -22,8 +27,15 @@ const I18N = {
       cfgA11y:"Accesibilidad",cfgA11yFab:"Botón flotante \"A+\" para agrandar la letra",
       ctaVender:"+ Publicar producto o servicio",ctaVenderSub:"Publica lo que ofreces en menos de un minuto.",
       cfgNote:"Estas preferencias se guardan en este dispositivo. La traducción completa del contenido aún está en desarrollo; por ahora se traduce la navegación principal.",
-      soloResidentes:"Debes iniciar sesión (solo habitantes de Manta pueden hacerlo)"},
-  en:{navInicio:"Home",navServicios:"Services",navAyuda:"? Help",navVender:"Publish",navPerfil:"Profile",navIngresar:"Log in",
+      soloResidentes:"Debes iniciar sesión (solo habitantes de Manta pueden hacerlo)",
+      volverVender:"← Volver a mis publicaciones",publicarTitle:"Publicar producto o servicio",editarTitle:"Editar producto o servicio",
+      guardarCambios:"Guardar cambios",subirFoto:"Toca para subir una foto",mercaderLbl:"Mercader:",tipoLbl:"Producto",
+      nombreProductoLbl:"Nombre del producto",nombreProductoPh:"Ej: Panela orgánica",precioLbl:"Precio",precioPh:"Ej: $8.000 libra",
+      fechaLbl:"Publicar hasta",infoLbl:"Información sobre el producto",infoPh:"Cuéntale a la comunidad qué ofreces…",
+      notasLbl:"Notas (opcional)",notasPh:"Ej: solo domicilios los fines de semana",contactoMercader:"Contacto del mercader",
+      telefonoPh:"Teléfono",whatsappPh:"WhatsApp",instagramPh:"Instagram (opcional)",
+      referenciasNote:"✰✰✰✰✰ Las estrellas de referencia las genera la comunidad con sus reseñas — no se editan aquí."},
+  en:{navInicio:"Home",navServicios:"Services",navAyuda:"Help",navVender:"Publish",navPerfil:"Profile",navIngresar:"Log in",
       heroTitle:"What are you looking for in Manta today?",buscarPh:"Search a product or service…",
       destacados:"Featured this week",misProductos:"My listings",volver:"← Back to catalog",
       serviciosTitle:"Community services",serviciosDesc:"Besides products, MantaLink lets you offer or find services like transport, workshops and rural lodging.",
@@ -34,7 +46,14 @@ const I18N = {
       cfgA11y:"Accessibility",cfgA11yFab:"Floating \"A+\" button to enlarge text",
       ctaVender:"+ Publish product or service",ctaVenderSub:"Publish what you offer in under a minute.",
       cfgNote:"These preferences are saved on this device. Full content translation is still in progress; for now only the main navigation is translated.",
-      soloResidentes:"You must log in (only Manta residents can)"}
+      soloResidentes:"You must log in (only Manta residents can)",
+      volverVender:"← Back to my listings",publicarTitle:"Publish product or service",editarTitle:"Edit product or service",
+      guardarCambios:"Save changes",subirFoto:"Tap to upload a photo",mercaderLbl:"Seller:",tipoLbl:"Product",
+      nombreProductoLbl:"Product name",nombreProductoPh:"E.g: Organic panela",precioLbl:"Price",precioPh:"E.g: $8,000 per pound",
+      fechaLbl:"Publish until",infoLbl:"Information about the product",infoPh:"Tell the community what you offer…",
+      notasLbl:"Notes (optional)",notasPh:"E.g: delivery on weekends only",contactoMercader:"Seller contact",
+      telefonoPh:"Phone",whatsappPh:"WhatsApp",instagramPh:"Instagram (optional)",
+      referenciasNote:"✰✰✰✰✰ Reference stars are generated by the community's reviews — they aren't edited here."}
 };
 
 function ls(key,val){ try{ if(val===undefined) return localStorage.getItem(key); localStorage.setItem(key,val);}catch(e){} }
@@ -49,13 +68,14 @@ function toast(msg){
 // Ruta pública -> id de <section class="screen">
 const RUTA_A_PANTALLA = {
   home:'inicio', login:'login', registro:'registro', servicios:'servicios-info',
-  ayuda:'ayuda', vender:'vender', perfil:'perfil', config:'config', producto:'detalle'
+  ayuda:'ayuda', publicar:'publicar', perfil:'perfil', config:'config', producto:'detalle'
 };
-const RUTAS_PROTEGIDAS = ['vender','perfil'];
+const RUTAS_PROTEGIDAS = ['publicar','perfil'];
+// Rutas: #/publicar (mis publicaciones) · #/publicar/nuevo · #/publicar/editar/ID
 
 function rutaActual(){
   const partes = location.hash.replace(/^#\/?/,'').split('/').filter(Boolean);
-  return {nombre: partes[0] || 'home', param: partes[1]};
+  return {nombre: partes[0] || 'home', param: partes[1], param2: partes[2]};
 }
 
 function navegar(ruta){
@@ -65,7 +85,8 @@ function navegar(ruta){
 }
 
 function sincronizarDesdeHash(){
-  let {nombre, param} = rutaActual();
+  let {nombre, param, param2} = rutaActual();
+  if(nombre === 'vender') nombre = 'publicar'; // nombre antiguo de la ruta
   if(!RUTA_A_PANTALLA[nombre]) nombre = 'home';
 
   if(RUTAS_PROTEGIDAS.includes(nombre) && !sesionActiva){
@@ -74,13 +95,18 @@ function sincronizarDesdeHash(){
     return;
   }
 
-  const pantallaId = RUTA_A_PANTALLA[nombre];
+  const enFormulario = nombre==='publicar' && (param==='nuevo' || param==='editar');
+  const idEditar = param==='editar' ? Number(param2) : null;
+  if(idEditar && !misPublicaciones.find(x=>x.id===idEditar)){ location.hash = '#/publicar'; return; }
+  const pantallaId = enFormulario ? 'publicar-form' : RUTA_A_PANTALLA[nombre];
   document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active', s.id===pantallaId));
   document.querySelectorAll('.mainnav button, .bottom-nav button').forEach(b=>b.classList.toggle('active', b.dataset.s===nombre));
   document.getElementById('mainnav').classList.remove('open');
   document.getElementById('menuToggle').setAttribute('aria-expanded','false');
+  actualizarSesion(); // por seguridad: re-sincroniza qué botones deben verse en cada navegación
+  if(nombre !== 'producto') ultimaRutaNoDetalle = nombre;
 
-  if(nombre==='vender') renderMisProductos();
+  if(nombre==='publicar'){ if(enFormulario) cargarFormulario(idEditar); else renderMisProductos(); }
   if(nombre==='servicios') renderServicios();
   if(nombre==='producto' && param) verDetalle(Number(param));
 
@@ -105,7 +131,19 @@ document.getElementById('filtro').addEventListener('change', e=>{
   renderCatalogo();
 });
 document.getElementById('olvide').addEventListener('click', ()=>toast('Se enviaría un enlace de recuperación a tu correo'));
-document.getElementById('cta-vender').addEventListener('click', ()=>toast('Aquí se abriría el formulario para publicar'));
+document.getElementById('backBtn').addEventListener('click', ()=>navegar(ultimaRutaNoDetalle));
+document.getElementById('backPublicarBtn').addEventListener('click', ()=>navegar('publicar'));
+document.getElementById('cta-vender').addEventListener('click', ()=>abrirFormularioPublicar(null));
+document.querySelectorAll('.guardar-publicacion').forEach(b=>b.addEventListener('click', guardarPublicacion));
+
+document.getElementById('fotoUpload').addEventListener('keydown', e=>{
+  if(e.key==='Enter' || e.key===' '){ e.preventDefault(); document.getElementById('fotoInput').click(); }
+});
+document.getElementById('fotoInput').addEventListener('change', e=>{
+  const archivo = e.target.files[0]; if(!archivo) return;
+  fotoPreviewURL = URL.createObjectURL(archivo);
+  document.getElementById('fotoPreview').innerHTML = `<img src="${fotoPreviewURL}" alt="" style="width:100%; height:100%; object-fit:cover; border-radius:12px">`;
+});
 document.getElementById('menuToggle').addEventListener('click', ()=>{
   const abierto = document.getElementById('mainnav').classList.toggle('open');
   document.getElementById('menuToggle').setAttribute('aria-expanded', abierto ? 'true' : 'false');
@@ -177,11 +215,62 @@ function verDetalle(id){
 }
 
 function renderMisProductos(){
-  document.getElementById('lista-mis-productos').innerHTML = productos.slice(0,2).map(p=>`
+  document.getElementById('lista-mis-productos').innerHTML = misPublicaciones.map(p=>`
     <div class="list-row">
       <div><strong>${p.nombre}</strong><div style="font-size:.85rem; color:var(--ink-soft)">${p.categoria} · ${p.precio}</div></div>
-      <button class="btn btn-outline" onclick="toast('Aquí podrías editar este producto')">Editar</button>
+      <button class="btn btn-outline" onclick="abrirFormularioPublicar(${p.id})">Editar</button>
     </div>`).join('');
+}
+
+function t(clave){ return (I18N[idiomaActual()] || I18N.es)[clave] || clave; }
+
+function abrirFormularioPublicar(id){
+  navegar(id ? 'publicar/editar/'+id : 'publicar/nuevo');
+}
+
+function cargarFormulario(id){
+  idEnEdicion = id || null;
+  const p = id ? misPublicaciones.find(x=>x.id===id) : null;
+
+  document.getElementById('publishTitle').textContent = p ? t('editarTitle') : t('publicarTitle');
+  document.getElementById('mercaderNombre').textContent = 'Pepito Pérez';
+  document.getElementById('pubTipo').value = p ? p.categoria : 'Alimentos';
+  document.getElementById('pubNombre').value = p ? p.nombre : '';
+  document.getElementById('pubPrecio').value = p ? p.precio : '';
+  document.getElementById('pubFecha').value = '';
+  document.getElementById('pubInfo').value = p ? p.desc : '';
+  document.getElementById('pubNotas').value = '';
+  document.getElementById('pubTelefono').value = '';
+  document.getElementById('pubWhatsapp').value = '';
+  document.getElementById('pubInstagram').value = '';
+
+  fotoPreviewURL = p ? p.img : null;
+  document.getElementById('fotoPreview').innerHTML = p
+    ? `<img src="${p.img}" alt="" style="width:100%; height:100%; object-fit:cover; border-radius:12px">`
+    : fotoPlaceholderHTML;
+}
+
+function guardarPublicacion(){
+  const nombre = document.getElementById('pubNombre').value.trim();
+  if(!nombre){ toast('Ponle un nombre a tu producto o servicio'); return; }
+  const datos = {
+    categoria: document.getElementById('pubTipo').value,
+    nombre,
+    precio: document.getElementById('pubPrecio').value.trim() || 'Consultar precio',
+    desc: document.getElementById('pubInfo').value.trim(),
+    vendedor: document.getElementById('mercaderNombre').textContent,
+    rating: '★ Nuevo',
+    img: fotoPreviewURL || 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=500'
+  };
+  if(idEnEdicion){
+    const idx = misPublicaciones.findIndex(x=>x.id===idEnEdicion);
+    if(idx > -1) misPublicaciones[idx] = {...misPublicaciones[idx], ...datos};
+    toast('Cambios guardados');
+  } else {
+    misPublicaciones.push({id: Date.now(), ...datos});
+    toast('¡Publicado! Ya aparece en Mis publicaciones');
+  }
+  navegar('publicar');
 }
 
 /* ---------- Sesión (gating de botones) ---------- */
@@ -195,7 +284,7 @@ function actualizarSesion(){
 }
 document.getElementById('btnLogin').addEventListener('click', ()=>{
   sesionActiva = true; ls('mantalink-sesion','1'); actualizarSesion();
-  toast('¡Bienvenido de nuevo!'); navegar('vender');
+  toast('¡Bienvenido de nuevo!'); navegar('home');
 });
 document.getElementById('btnLogout').addEventListener('click', ()=>{
   sesionActiva = false; ls('mantalink-sesion','0'); actualizarSesion();
@@ -210,7 +299,7 @@ document.getElementById('btnRegistro').addEventListener('click', ()=>{
   }
   sesionActiva = true; ls('mantalink-sesion','1'); actualizarSesion();
   toast('¡Cuenta creada! Queda pendiente de verificación por la Junta de Acción Comunal.');
-  navegar('vender');
+  navegar('perfil');
 });
 
 /* ---------- Tema, tamaño de texto e idioma ---------- */
