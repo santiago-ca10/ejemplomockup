@@ -19,28 +19,38 @@
 <header>
   <div class="headrow">
     <div class="logo" data-s="home">Manta<span>Link</span></div>
+    <div class="more-menu" id="moreMenu">
+      <button class="icon-btn more-toggle" id="moreToggle" aria-haspopup="true" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+        <span data-i18n="masBtn">Más</span>
+      </button>
+      <div class="more-dropdown" id="moreDropdown">
+        <button data-s="ayuda" class="icon-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2-3 4"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span data-i18n="navAyuda">Ayuda</span>
+        </button>
+        <button data-s="config" class="icon-btn gear-btn" title="Configuración" aria-label="Configuración">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="gear-icon" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          <span data-i18n="cfgTitle">Configuración</span>
+        </button>
+      </div>
+    </div>
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
     <nav class="mainnav" id="mainnav">
       <button data-s="home" class="active" data-i18n="navInicio">Inicio</button>
       <button data-s="servicios" data-i18n="navServicios">Servicios</button>
-      <button data-s="ayuda" class="icon-btn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2-3 4"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        <span data-i18n="navAyuda">Ayuda</span>
-      </button>
-      <button data-s="config" class="icon-btn gear-btn" title="Configuración" aria-label="Configuración">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="gear-icon" aria-hidden="true">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-        </svg>
-        <span data-i18n="cfgTitle">Configuración</span>
-      </button>
       <button data-s="publicar" id="navVender" hidden data-i18n="navVender">Vender</button>
+      <button data-s="favoritos" id="navFavoritos" hidden>♥ Favoritos</button>
       <button data-s="perfil" id="navPerfil" class="icon-btn" hidden>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="17" height="17" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
         <span data-i18n="navPerfil">Perfil</span>
       </button>
+      <button data-s="admin" id="navAdmin" hidden>🛠 Admin</button>
       <button data-s="login" id="navLogin" data-i18n="navIngresar">Ingresar</button>
     </nav>
   </div>
@@ -56,13 +66,13 @@
         <input id="buscador" data-i18n-ph="buscarPh" placeholder="Buscar producto o servicio…">
         <select id="filtro" aria-label="Filtrar por categoría">
           <option value="">Todas las categorías</option>
-          <option>Alimentos</option>
-          <option>Artesanías</option>
-          <option>Turismo</option>
-          <option>Servicios</option>
         </select>
       </div>
-      <div class="chips" id="chips"></div>
+      <div class="chips-row">
+        <button class="chips-arrow" id="chipsPrev" aria-label="Ver categorías anteriores">‹</button>
+        <div class="chips" id="chips"></div>
+        <button class="chips-arrow" id="chipsNext" aria-label="Ver más categorías">›</button>
+      </div>
     </div>
 
     <div class="section-title"><h3 data-i18n="destacados">Destacados esta semana</h3></div>
@@ -136,21 +146,20 @@
         <button class="btn-save guardar-publicacion" data-i18n="guardarCambios">Guardar cambios</button>
       </div>
 
-      <label class="photo-upload" id="fotoUpload" tabindex="0" role="button" aria-label="Subir foto del producto">
-        <input type="file" id="fotoInput" accept="image/*" hidden>
-        <div class="photo-placeholder" id="fotoPreview">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h4l2-2h6l2 2h4v13H3z"/><circle cx="12" cy="13" r="4"/></svg>
-          <span data-i18n="subirFoto">Toca para subir una foto</span>
-        </div>
-      </label>
+      <div class="field-label-standalone" data-i18n="fotosLbl">Fotos del producto (máximo 5)</div>
+      <div class="photo-grid" id="photoGrid"></div>
+      <input type="file" id="fotoInput" accept="image/*" multiple hidden>
 
       <p class="mercader-line"><span data-i18n="mercaderLbl">Mercader:</span> <strong id="mercaderNombre">Pepito Pérez</strong></p>
 
       <div class="field">
         <label for="pubTipo" data-i18n="tipoLbl">Producto</label>
-        <select id="pubTipo">
-          <option>Alimentos</option><option>Artesanías</option><option>Turismo</option><option>Servicios</option>
-        </select>
+        <select id="pubTipo"></select>
+      </div>
+
+      <div class="field" id="subtipoField" hidden>
+        <label for="pubSubtipo" data-i18n="subtipoLbl">Tipo específico</label>
+        <select id="pubSubtipo"></select>
       </div>
 
       <div class="field field-editable">
@@ -161,7 +170,11 @@
 
       <div class="field-row">
         <div class="field"><label for="pubPrecio" data-i18n="precioLbl">Precio</label><input id="pubPrecio" data-i18n-ph="precioPh" placeholder="Ej: $8.000 libra"></div>
-        <div class="field"><label for="pubFecha" data-i18n="fechaLbl">Publicar hasta</label><input id="pubFecha" type="date"></div>
+        <div class="field">
+          <label for="pubDias" data-i18n="diasLbl">Días de publicación</label>
+          <input id="pubDias" type="number" min="1" step="1">
+          <p id="diasHint" class="field-hint"></p>
+        </div>
       </div>
 
       <div class="field field-editable">
@@ -177,22 +190,10 @@
       </div>
 
       <h4 class="contact-title" data-i18n="contactoMercader">Contacto del mercader</h4>
-      <div class="contact-fields">
-        <div class="contact-field">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>
-          <input id="pubTelefono" data-i18n-ph="telefonoPh" placeholder="Teléfono">
-        </div>
-        <div class="contact-field">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          <input id="pubWhatsapp" data-i18n-ph="whatsappPh" placeholder="WhatsApp">
-        </div>
-        <div class="contact-field">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg>
-          <input id="pubInstagram" data-i18n-ph="instagramPh" placeholder="Instagram (opcional)">
-        </div>
-      </div>
+      <div class="contact-readonly" id="contactoResumen"></div>
+      <p class="settings-note"><span data-i18n="contactoNota">Estos datos se toman de tu perfil.</span> <span class="link" data-s="perfil" data-i18n="editarEnPerfil">Editar en tu perfil</span></p>
 
-      <p class="settings-note" data-i18n="referenciasNote">✰✰✰✰✰ Las estrellas de referencia las genera la comunidad con sus reseñas — no se editan aquí.</p>
+      <p class="settings-note" data-i18n="referenciasNote">✰✰✰✰✰ Las estrellas de referencia reflejan tu reputación como mercader (las genera la comunidad con sus reseñas) — no se editan aquí.</p>
 
       <button class="btn btn-primary guardar-publicacion" style="width:100%; justify-content:center; margin-top:4px" data-i18n="guardarCambios">Guardar cambios</button>
     </div>
@@ -218,15 +219,33 @@
   <section class="screen" id="perfil">
     <div class="profile-card">
       <div class="profile-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
-      <h3>Pepito Pérez Pérez</h3>
-      <p style="color:var(--ink-soft); font-size:.87rem">Emprendedor · Manta</p>
+      <h3 id="perfilNombreDisplay">Pepito Pérez Pérez</h3>
+      <p style="color:var(--ink-soft); font-size:.87rem" data-i18n="emprendedorManta">Emprendedor · Manta</p>
       <span class="badge">⏳ Cuenta en verificación</span>
-      <div class="profile-info">
-        <p><strong>Teléfono:</strong> ######</p>
-        <p><strong>Correo:</strong> user@mail.com</p>
-        <p><strong>Vereda/barrio:</strong> El Salitre</p>
+
+      <button class="btn btn-outline" style="width:100%; justify-content:center; margin-top:18px" id="btnEditarPerfil">✎ Editar perfil</button>
+
+      <div id="perfilEditWrap" hidden>
+        <h4 class="contact-title" data-i18n="misDatos">Mis datos</h4>
+        <div class="field"><label for="perfilNombre" data-i18n="nombreLbl">Nombre completo</label><input id="perfilNombre"></div>
+        <div class="field"><label for="perfilTelefono" data-i18n="telefonoLbl">Teléfono</label><input id="perfilTelefono"></div>
+        <div class="field"><label for="perfilCorreo" data-i18n="correoLbl">Correo</label><input id="perfilCorreo"></div>
+        <div class="field"><label for="perfilVereda" data-i18n="veredaLbl">Vereda/barrio</label><input id="perfilVereda"></div>
+
+        <h4 class="contact-title" data-i18n="redesTitle">Redes sociales (para tu marketing)</h4>
+        <div class="field"><label for="perfilInstagram">Instagram</label><input id="perfilInstagram" placeholder="@tuusuario"></div>
+        <div class="field"><label for="perfilFacebook">Facebook</label><input id="perfilFacebook" placeholder="/tupagina"></div>
+        <div class="field"><label for="perfilTiktok">TikTok</label><input id="perfilTiktok" placeholder="@tuusuario"></div>
+
+        <button class="btn btn-primary" style="width:100%; justify-content:center; margin-top:6px" id="btnGuardarPerfil" data-i18n="guardarCambios">Guardar cambios</button>
       </div>
-      <button class="btn btn-outline" style="width:100%; justify-content:center; margin-top:14px" id="btnLogout" data-i18n="cerrarSesion">Cerrar sesión</button>
+
+      <button class="btn btn-outline" style="width:100%; justify-content:center; margin-top:10px" id="btnLogout" data-i18n="cerrarSesion">Cerrar sesión</button>
+    </div>
+
+    <div class="sell-cta" id="cta-vender-perfil" tabindex="0" role="button" style="max-width:440px; margin:18px auto 0">
+      <strong data-i18n="ctaVender">+ Publicar producto o servicio</strong>
+      <p style="color:var(--ink-soft); font-size:.87rem; margin:6px 0 0" data-i18n="ctaVenderSub">Publica lo que ofreces en menos de un minuto.</p>
     </div>
   </section>
 
@@ -234,6 +253,7 @@
   <section class="screen" id="config">
     <div class="section-title"><h3 data-i18n="cfgTitle">Configuración</h3></div>
     <div class="settings-card">
+      <button class="btn btn-outline" id="btnRestaurarConfig" style="width:100%; justify-content:center; margin-bottom:22px" data-i18n="restaurarBtn">↺ Restaurar valores por defecto</button>
       <h4 data-i18n="cfgTheme">Tema de color</h4>
       <div class="theme-options">
         <button class="theme-opt" data-theme-btn="manta"><span class="swatch swatch-flag"></span><span data-i18n="cfgThemeManta">Manta (predeterminado)</span></button>
@@ -244,7 +264,7 @@
       <h4 data-i18n="cfgTextSize">Tamaño de letra</h4>
       <div class="seg">
         <button data-size-btn="normal" data-i18n="cfgNormal">Normal</button>
-        <button data-size-btn="grande" data-i18n="cfgGrande">Grande (adultos mayores)</button>
+        <button data-size-btn="grande" data-i18n="cfgGrande">Grande</button>
       </div>
 
       <h4 data-i18n="cfgLang">Idioma</h4>
@@ -264,6 +284,29 @@
 
       <p class="settings-note" data-i18n="cfgNote">Estas preferencias se guardan en este dispositivo. La traducción completa del contenido aún está en desarrollo; por ahora se traduce la navegación principal.</p>
     </div>
+  </section>
+
+  <!-- ADMIN (solo entra admin@mail.com / admin) -->
+  <section class="screen" id="admin">
+    <div class="section-title"><h3>Panel de administración</h3></div>
+    <p style="color:var(--ink-soft); max-width:60ch; margin-bottom:20px">Simulación de las tareas del administrador: verificar residentes, moderar publicaciones y gestionar categorías.</p>
+
+    <div class="admin-stats" id="adminStats"></div>
+
+    <h4 class="contact-title">Cuentas pendientes de verificación</h4>
+    <div id="adminPendientes"></div>
+
+    <h4 class="contact-title">Publicaciones de la comunidad</h4>
+    <div id="adminPublicaciones"></div>
+
+    <h4 class="contact-title">Categorías</h4>
+    <div class="chips" id="adminCategorias" style="justify-content:flex-start; margin-bottom:10px"></div>
+    <div class="field-row">
+      <div class="field"><input id="adminNuevaCategoria" placeholder="Nueva categoría, ej: Mascotas"></div>
+      <button class="btn btn-primary" id="btnAgregarCategoria" style="flex:0 0 auto">+ Agregar</button>
+    </div>
+
+    <button class="btn btn-outline" style="width:100%; justify-content:center; margin-top:22px" id="btnLogoutAdmin">Cerrar sesión de administrador</button>
   </section>
 
 </main>
