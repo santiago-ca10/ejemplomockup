@@ -1,5 +1,5 @@
-const productos = [
-  {id:1, nombre:"Panela orgánica", categoria:"Alimentos", vendedor:"Trapiche enrramada de Bermejal", rating:"★ 4.8", precio:"$8.000 libra", desc:"Panela artesanal molida en trapiche familiar, sin químicos añadidos.",
+let productos = [
+  {id:1, nombre:"Panela orgánica", categoria:"Alimentos", vendedor:"Trapiche enramada de Bermejal", rating:"★ 4.8", precio:"$8.000 libra", desc:"Panela artesanal molida en trapiche familiar, sin químicos añadidos.",
     imgs:["https://upra.gov.co/sites/default/files/styles/webp/public/2025-04/La%20panela%20colombiana%20conquista%20paladares%20en%20todo%20el%20mundo.jpg.webp?itok=z5_-ylRC"]},
   {id:2, nombre:"Ruana de lana virgen", categoria:"Artesanías", vendedor:"Doña Rosa Tejidos", rating:"★ 4.9", precio:"$385.000", desc:"Tejida a mano con técnicas heredadas de generación en generación.",
     imgs:["https://static.wixstatic.com/media/478bee_2029d26aec7447bc953625b8c61f0747~mv2.jpg/v1/fill/w_480,h_480,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/478bee_2029d26aec7447bc953625b8c61f0747~mv2.jpg"]},
@@ -16,15 +16,23 @@ const productos = [
     imgs:["https://hotelboutiquecorazondelcielo.com/wp-content/uploads/2026/03/39af9076-674b-43e9-9229-490facb7da22-1-768x1024.jpg",
           "https://hotelboutiquecorazondelcielo.com/wp-content/uploads/2026/03/PHOTO-2026-03-28-12-12-09-683x1024.jpg",
           "https://hotelboutiquecorazondelcielo.com/wp-content/uploads/2026/03/c553d869-3c8f-4f88-96da-81906413726a-1005x1536.jpg"]},
-  {id:7, nombre:"Caminata a la quebrada (Cascada El Golpe)", categoria:"Turismo", vendedor:"Guías Manta Rural", rating:"★ Nuevo", precio:"$20.000 p/persona", desc:"Caminata guiada hasta la cascada — revisa el nombre y la descripción, los dejé como borrador.",
+  {id:7, nombre:"Caminata a la quebrada (Cascada El Golpe)", categoria:"Turismo", vendedor:"Guías Manta Rural", rating:"★ Nuevo", precio:"$20.000 p/persona", desc:"Caminata guiada por senderos rurales hasta la cascada El Golpe, con acompañamiento durante todo el recorrido.",
     imgs:["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIel6GjfYuNLLNkLYOa9UwHcVSEVhU347m1jEqfYLFLw&s=10",
           "https://caminatasalairelibre.com/wp-content/uploads/2023/06/20-Caminata-Cascada-El-Golpe.jpg"]},
   {id:8, nombre:"Ternero bovino de levante", categoria:"Animales", subcategoria:"Bovinos", vendedor:"Finca Los Alpes", rating:"★ 4.5", precio:"$950.000", desc:"Ternero sano, vacunado y desparasitado, listo para levante.",
-    imgs:["https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&q=80&w=500"]},
+    imgs:["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpL5Yuj33iIrl-OuVTPyoAYsG2XhkygtFcZ7gXMtS6sw&s=10"]},
   {id:9, nombre:"Panadería La Espiga Dorada", categoria:"Emprendimientos", subcategoria:"Panadería", vendedor:"La Espiga Dorada", rating:"★ 4.9", precio:"Desde $2.000", desc:"Pan campesino, almojábanas y pan de queso recién horneados cada mañana.",
     imgs:["https://images.unsplash.com/photo-1608198093002-ad4e005484ec?auto=format&fit=crop&q=80&w=500"]},
   {id:10, nombre:"Mazorcas frescas del agro", categoria:"Productos del agro", subcategoria:"Mazorca y cereales", vendedor:"Cultivos El Manantial", rating:"★ 4.7", precio:"$3.000 unidad", desc:"Mazorca recién cosechada, cultivada sin químicos en la vereda.",
     imgs:["https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&q=80&w=500"]},
+  {id:11, nombre:"Festival de gallina con arepa", categoria:"Eventos", vendedor:"Alcaldía de Manta", rating:"★ Nuevo", precio:"Entrada libre", desc:"Festival gastronómico comunitario con concurso de la mejor gallina con arepa, música en vivo y venta de emprendimientos locales.",
+    fechaEvento: (()=>{ const f=new Date(); f.setDate(f.getDate()+12); return f.toISOString().slice(0,10); })(),
+        imgs:["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtelTs7T5aS5aMAf3G2BMTfUoet7JOBOFbsxmXOwSe4A&s=10",
+          "https://elobservador.com.co/wp-content/uploads/2025/10/560654982_1125835319738366_8795887400586422448_n-768x1024.jpg",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgy3S-YNtn90e1YTIEPIFq4TW-EanaPkVoR2Qinuoxeg&s=10"]},
+  {id:12, nombre:"Jornada de reciclaje veredal", categoria:"Eventos", vendedor:"Alcaldía de Manta", rating:"★ Nuevo", precio:"Entrada libre", desc:"Jornada comunitaria de reciclaje y limpieza de las veredas — este ya pasó, es de ejemplo para mostrar que los eventos vencidos se quitan solos.",
+    fechaEvento: (()=>{ const f=new Date(); f.setDate(f.getDate()-3); return f.toISOString().slice(0,10); })(),
+    imgs:["https://images.unsplash.com/photo-1618477388954-7852f32655ec?auto=format&fit=crop&q=80&w=500"]},
 ];
 productos.forEach(p=>{ p.img = p.imgs[0]; }); // portada = primera foto, para no romper las tarjetas del catálogo
 // Categorías: días mín/máx de publicación por tipo (ejemplo razonable, ajústalo si no cuadra)
@@ -36,9 +44,12 @@ const CATEGORIAS = {
   "Servicios":        {dias:{min:1, max:90}, subcategorias:null},
   "Animales":         {dias:{min:1, max:7},  subcategorias:["Bovinos","Porcinos","Avícolas","Otros"]},
   "Emprendimientos":  {dias:{min:1, max:60}, subcategorias:["Gastronómico","Artesanías","Lácteos","Panadería","Cárnicos","Otros"]},
-  "Productos del agro":{dias:{min:1, max:30}, subcategorias:["Frutas","Verduras","Tubérculos","Mazorca y cereales","Otros"]}
+  "Productos del agro":{dias:{min:1, max:30}, subcategorias:["Frutas","Verduras","Tubérculos","Mazorca y cereales","Otros"]},
+  "Eventos":          {esEvento:true, subcategorias:null} // se publican con una fecha puntual y se borran solos al pasar
 };
 let categoriaActiva = "Todos";
+let categoriasFiltroAvanzado = []; // filtros avanzados: varias categorías a la vez
+let subtipoFiltroAvanzado = ''; // búsqueda específica dentro de esas categorías (ej. "Bovinos")
 let sesionActiva = false;
 let favoritos = new Set();
 let vendedoresRating = {}; // {nombreVendedor:{suma,count}} — calificación real, acumulada por reseñas
@@ -52,6 +63,7 @@ let misPublicaciones = productos.slice(0,2).map(p=>({...p})); // copia editable,
   if(misPublicaciones[1]){ misPublicaciones[1].duracionDias = 20; misPublicaciones[1].vigenteHasta = enDiez.toISOString().slice(0,10); }
 })();
 let idEnEdicion = null;
+let origenEdicion = null; // 'mis' | 'catalogo' — para saber dónde guardar al editar (el admin puede editar publicaciones ajenas)
 let fotosPreview = []; // URLs de las fotos del formulario (máx. 5)
 let perfilUsuario = {nombre:"Pepito Pérez Pérez", telefono:"300 000 0000", correo:"user@mail.com", vereda:"El Salitre", instagram:"", facebook:"", tiktok:""};
 
@@ -65,6 +77,15 @@ let cuentasPendientes = [
 ];
 let carTimer = null, carIndex = 0; // estado del carrusel de fotos del detalle
 let miUltimaCalificacion = {}; // {vendedor: estrellas} — mi propio voto, para no acumular infinito al reclicar
+let reportes = []; // {id, productoId, nombre, motivo, comentario, fecha}
+let adminVistaActual = null;
+
+function limpiarEventosVencidos(){
+  // "se borran automáticamente": al pasar la fecha, el evento desaparece del catálogo
+  const hoy = new Date().toISOString().slice(0,10);
+  productos = productos.filter(p => !(p.categoria==='Eventos' && p.fechaEvento && p.fechaEvento < hoy));
+  misPublicaciones = misPublicaciones.filter(p => !(p.categoria==='Eventos' && p.fechaEvento && p.fechaEvento < hoy));
+}
 
 const I18N = {
   es:{navInicio:"Inicio",navServicios:"Servicios",navAyuda:"Ayuda",navVender:"Publicar",navPerfil:"Perfil",navIngresar:"Ingresar",
@@ -131,15 +152,50 @@ function ls(key,val){ try{ if(val===undefined) return localStorage.getItem(key);
 
 function poblarCategorias(){
   const nombres = Object.keys(CATEGORIAS);
-  document.getElementById('chips').innerHTML = ['Todos', ...nombres, 'Favoritos'].map(c=>
-    `<button class="chip ${c===categoriaActiva?'active':''}" data-c="${c}">${c==='Favoritos' ? '♥ Favoritos' : c}</button>`).join('');
-  document.getElementById('filtro').innerHTML = `<option value="">Todas las categorías</option>` + nombres.map(c=>`<option>${c}</option>`).join('');
-  document.getElementById('pubTipo').innerHTML = nombres.map(c=>`<option>${c}</option>`).join('');
+  document.getElementById('chips').innerHTML = ['Todos', ...nombres].map(c=>
+    `<button class="chip ${c===categoriaActiva?'active':''}" data-c="${c}">${c}</button>`).join('');
+  document.getElementById('pubTipo').innerHTML = nombres.map(c=>`<option value="${c}">${c}</option>`).join('');
+  document.getElementById('advFiltersCats').innerHTML = nombres.map(c=>`
+    <label class="adv-cat-check"><input type="checkbox" value="${c}"> ${c}</label>`).join('');
+  document.querySelectorAll('#advFiltersCats input').forEach(chk=>chk.addEventListener('change', actualizarSubtipoAvanzado));
   const adminCont = document.getElementById('adminCategorias');
   if(adminCont){
     adminCont.innerHTML = nombres.map(c=>`<span class="chip">${c}</span>`).join('');
   }
 }
+
+function actualizarSubtipoAvanzado(){
+  const marcadas = [...document.querySelectorAll('#advFiltersCats input:checked')].map(i=>i.value);
+  const subField = document.getElementById('advSubField');
+  const subSel = document.getElementById('advSubtipo');
+  const subs = marcadas.length===1 && CATEGORIAS[marcadas[0]] ? CATEGORIAS[marcadas[0]].subcategorias : null;
+  if(subs){
+    subField.hidden = false;
+    subSel.innerHTML = `<option value="">Cualquiera</option>` + subs.map(s=>`<option>${s}</option>`).join('');
+  } else {
+    subField.hidden = true; subSel.innerHTML = `<option value="">Cualquiera</option>`;
+  }
+}
+document.getElementById('btnFiltrosAvanzados').addEventListener('click', ()=>{
+  document.getElementById('advFilters').hidden = !document.getElementById('advFilters').hidden;
+});
+document.getElementById('btnAplicarFiltros').addEventListener('click', ()=>{
+  categoriasFiltroAvanzado = [...document.querySelectorAll('#advFiltersCats input:checked')].map(i=>i.value);
+  subtipoFiltroAvanzado = document.getElementById('advSubtipo').value;
+  categoriaActiva = 'Todos';
+  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c.dataset.c==='Todos'));
+  document.getElementById('advFilters').hidden = true;
+  renderCatalogo();
+  const n = categoriasFiltroAvanzado.length;
+  toast(n ? `Filtro aplicado: ${n} categoría${n>1?'s':''}${subtipoFiltroAvanzado ? ' · '+subtipoFiltroAvanzado : ''}` : 'Filtros aplicados');
+});
+document.getElementById('btnLimpiarFiltros').addEventListener('click', ()=>{
+  categoriasFiltroAvanzado = []; subtipoFiltroAvanzado = '';
+  document.querySelectorAll('#advFiltersCats input').forEach(i=>i.checked=false);
+  actualizarSubtipoAvanzado();
+  renderCatalogo();
+  toast('Filtros avanzados limpiados');
+});
 
 /* Flechas para desplazar la fila de categorías */
 document.getElementById('chipsPrev').addEventListener('click', ()=> document.getElementById('chips').scrollBy({left:-200, behavior:'smooth'}));
@@ -183,7 +239,8 @@ function toast(msg){
 // Ruta pública -> id de <section class="screen">
 const RUTA_A_PANTALLA = {
   home:'inicio', login:'login', registro:'registro', servicios:'servicios-info',
-  ayuda:'ayuda', publicar:'publicar', perfil:'perfil', config:'config', producto:'detalle', admin:'admin'
+  favoritos:'favoritos-info', ayuda:'ayuda', publicar:'publicar', perfil:'perfil',
+  config:'config', producto:'detalle', admin:'admin'
 };
 const RUTAS_PROTEGIDAS = ['publicar','perfil'];
 // Rutas: #/publicar (mis publicaciones) · #/publicar/nuevo · #/publicar/editar/ID
@@ -217,7 +274,7 @@ function sincronizarDesdeHash(){
 
   const enFormulario = nombre==='publicar' && (param==='nuevo' || param==='editar');
   const idEditar = param==='editar' ? Number(param2) : null;
-  if(idEditar && !misPublicaciones.find(x=>x.id===idEditar)){ location.hash = '#/publicar'; return; }
+  if(idEditar && !misPublicaciones.find(x=>x.id===idEditar) && !productos.find(x=>x.id===idEditar)){ location.hash = '#/publicar'; return; }
   const pantallaId = enFormulario ? 'publicar-form' : RUTA_A_PANTALLA[nombre];
   document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active', s.id===pantallaId));
   document.querySelectorAll('.mainnav button, .bottom-nav button, .more-dropdown button').forEach(b=>b.classList.toggle('active', b.dataset.s===nombre));
@@ -230,6 +287,7 @@ function sincronizarDesdeHash(){
 
   if(nombre==='publicar'){ if(enFormulario) cargarFormulario(idEditar); else renderMisProductos(); }
   if(nombre==='servicios') renderServicios();
+  if(nombre==='favoritos') renderFavoritos();
   if(nombre==='producto' && param) verDetalle(Number(param));
   if(nombre==='admin') renderAdmin();
 
@@ -241,15 +299,12 @@ function idiomaActual(){ return (ls('mantalink-lang') || 'es'); }
 document.getElementById('chips').addEventListener('click', e=>{
   const b = e.target.closest('.chip'); if(!b) return;
   categoriaActiva = b.dataset.c;
+  categoriasFiltroAvanzado = []; subtipoFiltroAvanzado = ''; // un chip simple reemplaza cualquier filtro avanzado activo
+  document.querySelectorAll('#advFiltersCats input').forEach(i=>i.checked=false);
   document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c===b));
   renderCatalogo();
 });
 document.getElementById('buscador').addEventListener('input', renderCatalogo);
-document.getElementById('filtro').addEventListener('change', e=>{
-  categoriaActiva = e.target.value || "Todos";
-  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c.dataset.c===categoriaActiva));
-  renderCatalogo();
-});
 document.getElementById('olvide').addEventListener('click', ()=>toast('Se enviaría un enlace de recuperación a tu correo'));
 document.getElementById('backBtn').addEventListener('click', ()=>navegar(ultimaRutaNoDetalle));
 document.getElementById('backPublicarBtn').addEventListener('click', ()=>navegar('publicar'));
@@ -291,16 +346,7 @@ document.addEventListener('click', e=>{
   const b = e.target.closest('[data-s]'); if(!b) return;
   if(b.dataset.s === 'servicios'){
     categoriaActiva = 'Servicios';
-    document.getElementById('filtro').value = 'Servicios';
     navegar('servicios');
-    return;
-  }
-  if(b.dataset.s === 'favoritos'){
-    categoriaActiva = 'Favoritos';
-    document.getElementById('filtro').value = '';
-    document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c.dataset.c==='Favoritos'));
-    navegar('home');
-    renderCatalogo();
     return;
   }
   navegar(b.dataset.s);
@@ -336,16 +382,31 @@ function tarjetaProducto(p){
 }
 
 function renderCatalogo(){
+  limpiarEventosVencidos();
   const texto = document.getElementById('buscador').value.toLowerCase();
-  let visibles = productos.filter(p =>
-    (categoriaActiva==='Todos' || (categoriaActiva==='Favoritos' ? favoritos.has(p.id) : p.categoria===categoriaActiva)) &&
-    p.nombre.toLowerCase().includes(texto));
+  let visibles = productos.filter(p => {
+    if(!p.nombre.toLowerCase().includes(texto)) return false;
+    if(categoriasFiltroAvanzado.length){
+      if(!categoriasFiltroAvanzado.includes(p.categoria)) return false;
+      if(subtipoFiltroAvanzado && p.subcategoria !== subtipoFiltroAvanzado) return false;
+      return true;
+    }
+    return categoriaActiva==='Todos' || p.categoria===categoriaActiva;
+  });
   visibles = ordenarPorReputacion(visibles);
   const grid = document.getElementById('grid-productos');
   grid.innerHTML = visibles.length ? visibles.map(tarjetaProducto).join('') : `<p style="color:var(--ink-soft); font-style:italic">No encontramos resultados para tu búsqueda.</p>`;
 }
 
+function renderFavoritos(){
+  const misFavoritos = ordenarPorReputacion(productos.filter(p=>favoritos.has(p.id)));
+  document.getElementById('grid-favoritos').innerHTML = misFavoritos.length
+    ? misFavoritos.map(tarjetaProducto).join('')
+    : `<p style="color:var(--ink-soft); font-style:italic">Aún no tienes favoritos. Toca el ♡ en un producto para guardarlo aquí.</p>`;
+}
+
 function renderServicios(){
+  limpiarEventosVencidos();
   const servicios = ordenarPorReputacion(productos.filter(p=>p.categoria==='Servicios'));
   document.getElementById('grid-servicios').innerHTML = servicios.map(tarjetaProducto).join('');
 }
@@ -392,6 +453,32 @@ function verDetalle(id){
         </div>
         ${miVoto ? `<div class="mi-calificacion-txt">Tu calificación: ${miVoto} ★</div>` : ''}
       </div>
+
+      ${adminActivo ? `
+        <div class="admin-only-actions">
+          <button class="btn btn-outline" id="btnEditarDesdeDetalle">✎ Editar (admin)</button>
+          <button class="btn btn-outline" id="btnDarDeBajaDetalle" style="color:#B4483C; border-color:#B4483C">🚫 Dar de baja</button>
+        </div>
+      ` : `
+        <div class="report-box">
+          <button class="link" id="btnMostrarReporte" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h14l-3 4 3 4H5"/></svg>Reportar esta publicación</button>
+          <div id="reporteForm" hidden>
+            <div class="field"><label for="reporteMotivo">Motivo</label>
+              <select id="reporteMotivo">
+                <option>Información falsa</option>
+                <option>Precio engañoso</option>
+                <option>Contenido ofensivo</option>
+                <option>Producto o servicio prohibido</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="field"><label for="reporteComentario">Comentario (opcional)</label>
+              <textarea id="reporteComentario" rows="2" placeholder="Cuéntanos qué pasó…"></textarea>
+            </div>
+            <button class="btn btn-primary" id="btnEnviarReporte" type="button">Enviar reporte</button>
+          </div>
+        </div>
+      `}
     </div>`;
 
   // Carrusel: flechas, puntos, swipe táctil y avance automático cada 6s
@@ -416,7 +503,7 @@ function verDetalle(id){
       const n = Number(b.dataset.n);
       document.querySelectorAll('#starsInput .star-btn').forEach(x=>x.classList.toggle('filled', Number(x.dataset.n) <= n));
       calificarVendedor(p.vendedor, n);
-      let nota = document.querySelector('#starsInput + .mi-calificacion-txt') || document.querySelector('.rate-seller .mi-calificacion-txt');
+      let nota = document.querySelector('.rate-seller .mi-calificacion-txt');
       if(!nota){
         nota = document.createElement('div'); nota.className = 'mi-calificacion-txt';
         document.getElementById('starsInput').insertAdjacentElement('afterend', nota);
@@ -424,6 +511,32 @@ function verDetalle(id){
       nota.textContent = `Tu calificación: ${n} ★`;
     });
   });
+
+  if(adminActivo){
+    document.getElementById('btnEditarDesdeDetalle').addEventListener('click', ()=>abrirFormularioPublicar(p.id));
+    document.getElementById('btnDarDeBajaDetalle').addEventListener('click', ()=>{
+      if(!confirm('¿Dar de baja esta publicación?')) return;
+      darDeBajaPublicacion(p.id);
+      toast('Publicación dada de baja');
+      navegar(ultimaRutaNoDetalle);
+    });
+  } else {
+    document.getElementById('btnMostrarReporte').addEventListener('click', ()=>{
+      document.getElementById('reporteForm').hidden = false;
+      document.getElementById('btnMostrarReporte').hidden = true;
+    });
+    document.getElementById('btnEnviarReporte').addEventListener('click', ()=>{
+      reportes.push({
+        id: Date.now(), productoId: p.id, nombre: p.nombre,
+        motivo: document.getElementById('reporteMotivo').value,
+        comentario: document.getElementById('reporteComentario').value.trim(),
+        fecha: new Date().toISOString().slice(0,10)
+      });
+      document.getElementById('reporteForm').hidden = true;
+      document.getElementById('btnMostrarReporte').hidden = false;
+      toast('Reporte enviado. Un administrador lo revisará.');
+    });
+  }
   applyLang(idiomaActual()); // traduce el texto recién insertado (Califica a este mercader / stars label)
 }
 
@@ -494,53 +607,108 @@ function eliminarPublicacion(id){
 
 function t(clave){ return (I18N[idiomaActual()] || I18N.es)[clave] || clave; }
 
-/* ---------- Admin: renderizado y acciones (simulación) ---------- */
+/* ---------- Admin: dashboard de tarjetas + vistas (simulación) ---------- */
 function renderAdmin(){
-  document.getElementById('adminStats').innerHTML = `
-    <div class="admin-stat"><b>${cuentasPendientes.length}</b><span>Cuentas pendientes</span></div>
-    <div class="admin-stat"><b>${misPublicaciones.length + productos.length}</b><span>Publicaciones activas</span></div>
-    <div class="admin-stat"><b>${Object.keys(CATEGORIAS).length}</b><span>Categorías</span></div>`;
+  document.getElementById('nPendientes').textContent = cuentasPendientes.length;
+  document.getElementById('nReportadas').textContent = reportes.length;
+  document.getElementById('nPublicaciones').textContent = misPublicaciones.length + productos.length;
+  document.getElementById('nCategorias').textContent = Object.keys(CATEGORIAS).length;
+  document.getElementById('adminVistaWrap').hidden = true;
+  document.getElementById('adminDash').hidden = false;
+  adminVistaActual = null;
+}
 
-  document.getElementById('adminPendientes').innerHTML = cuentasPendientes.length
-    ? cuentasPendientes.map(c=>`
+document.querySelectorAll('#adminDash .admin-card').forEach(b=>b.addEventListener('click', ()=>abrirVistaAdmin(b.dataset.vista)));
+document.getElementById('btnVolverDash').addEventListener('click', renderAdmin);
+
+function abrirVistaAdmin(vista){
+  adminVistaActual = vista;
+  document.getElementById('adminDash').hidden = true;
+  document.getElementById('adminVistaWrap').hidden = false;
+  const cont = document.getElementById('adminVistaContenido');
+
+  if(vista === 'pendientes'){
+    cont.innerHTML = `<h4 class="contact-title" style="margin-top:0">Cuentas pendientes de verificación</h4>` + (cuentasPendientes.length
+      ? cuentasPendientes.map(c=>`
+        <div class="list-row">
+          <div><strong>${c.nombre}</strong><div style="font-size:.85rem; color:var(--ink-soft)">${c.vereda} · solicitó el ${c.fecha}</div></div>
+          <div class="list-row-actions">
+            <button class="btn btn-primary" onclick="aprobarCuenta(${c.id})">Verificar</button>
+            <button class="btn btn-outline" onclick="rechazarCuenta(${c.id})">Rechazar</button>
+          </div>
+        </div>`).join('')
+      : `<p style="color:var(--ink-soft); font-style:italic">No hay cuentas pendientes por ahora.</p>`);
+  }
+
+  if(vista === 'reportadas'){
+    cont.innerHTML = `<h4 class="contact-title" style="margin-top:0">Publicaciones reportadas</h4>` + (reportes.length
+      ? reportes.map(r=>`
+        <div class="list-row">
+          <div><strong>${r.nombre}</strong><div style="font-size:.85rem; color:var(--ink-soft)">${r.motivo}${r.comentario ? ' · "'+r.comentario+'"' : ''} · ${r.fecha}</div></div>
+          <div class="list-row-actions">
+            <button class="btn btn-outline" onclick="navegar('producto/${r.productoId}')">Ver publicación</button>
+            <button class="btn btn-outline" onclick="descartarReporte(${r.id})">Descartar</button>
+            <button class="btn btn-primary" style="background:#B4483C" onclick="darDeBajaDesdeReporte(${r.id}, ${r.productoId})">Dar de baja</button>
+          </div>
+        </div>`).join('')
+      : `<p style="color:var(--ink-soft); font-style:italic">No hay publicaciones reportadas.</p>`);
+  }
+
+  if(vista === 'publicaciones'){
+    const todas = [...misPublicaciones, ...productos];
+    cont.innerHTML = `<h4 class="contact-title" style="margin-top:0">Todas las publicaciones</h4>` + todas.map(p=>`
       <div class="list-row">
-        <div><strong>${c.nombre}</strong><div style="font-size:.85rem; color:var(--ink-soft)">${c.vereda} · solicitó el ${c.fecha}</div></div>
+        <div><strong>${p.nombre}</strong><div style="font-size:.85rem; color:var(--ink-soft)">${p.categoria} · ${p.vendedor}</div></div>
         <div class="list-row-actions">
-          <button class="btn btn-primary" onclick="aprobarCuenta(${c.id})">Verificar</button>
-          <button class="btn btn-outline" onclick="rechazarCuenta(${c.id})">Rechazar</button>
+          <button class="btn btn-outline" onclick="navegar('producto/${p.id}')">Abrir y revisar</button>
         </div>
-      </div>`).join('')
-    : `<p style="color:var(--ink-soft); font-style:italic">No hay cuentas pendientes por ahora.</p>`;
+      </div>`).join('');
+  }
 
-  const publicacionesComunidad = [...misPublicaciones, ...productos].slice(0,8);
-  document.getElementById('adminPublicaciones').innerHTML = publicacionesComunidad.map(p=>`
-    <div class="list-row">
-      <div><strong>${p.nombre}</strong><div style="font-size:.85rem; color:var(--ink-soft)">${p.categoria} · ${p.vendedor}</div></div>
-      <div class="list-row-actions"><button class="btn btn-outline" onclick="toast('Publicación retirada (simulado)')">Retirar</button></div>
-    </div>`).join('');
+  if(vista === 'categorias'){
+    cont.innerHTML = `
+      <h4 class="contact-title" style="margin-top:0">Categorías</h4>
+      <div class="chips" id="adminCategorias" style="justify-content:flex-start; margin-bottom:14px; overflow-x:visible; flex-wrap:wrap"></div>
+      <div class="field-row">
+        <div class="field"><input id="adminNuevaCategoria" placeholder="Nueva categoría, ej: Mascotas"></div>
+        <button class="btn btn-primary" id="btnAgregarCategoria" style="flex:0 0 auto">+ Agregar</button>
+      </div>`;
+    document.getElementById('adminCategorias').innerHTML = Object.keys(CATEGORIAS).map(c=>`<span class="chip">${c}</span>`).join('');
+    document.getElementById('btnAgregarCategoria').addEventListener('click', ()=>{
+      const input = document.getElementById('adminNuevaCategoria');
+      const nombre = input.value.trim();
+      if(!nombre) return;
+      if(!CATEGORIAS[nombre]) CATEGORIAS[nombre] = {dias:{min:1,max:30}, subcategorias:null};
+      poblarCategorias();
+      abrirVistaAdmin('categorias');
+      toast(`Categoría "${nombre}" agregada`);
+    });
+  }
 }
 
 function aprobarCuenta(id){
   const c = cuentasPendientes.find(x=>x.id===id);
   cuentasPendientes = cuentasPendientes.filter(x=>x.id!==id);
   toast(c ? `Cuenta de ${c.nombre} verificada` : 'Cuenta verificada');
-  renderAdmin();
+  abrirVistaAdmin('pendientes');
 }
 function rechazarCuenta(id){
   cuentasPendientes = cuentasPendientes.filter(x=>x.id!==id);
   toast('Solicitud rechazada');
-  renderAdmin();
+  abrirVistaAdmin('pendientes');
 }
-document.getElementById('btnAgregarCategoria').addEventListener('click', ()=>{
-  const input = document.getElementById('adminNuevaCategoria');
-  const nombre = input.value.trim();
-  if(!nombre) return;
-  if(!CATEGORIAS[nombre]) CATEGORIAS[nombre] = {dias:{min:1,max:30}, subcategorias:null};
-  input.value = '';
-  poblarCategorias();
-  renderAdmin();
-  toast(`Categoría "${nombre}" agregada`);
-});
+function descartarReporte(id){
+  reportes = reportes.filter(r=>r.id!==id);
+  toast('Reporte descartado');
+  abrirVistaAdmin('reportadas');
+}
+function darDeBajaDesdeReporte(reporteId, productoId){
+  if(!confirm('¿Dar de baja esta publicación?')) return;
+  darDeBajaPublicacion(productoId);
+  reportes = reportes.filter(r=>r.id!==reporteId);
+  toast('Publicación dada de baja');
+  abrirVistaAdmin('reportadas');
+}
 
 function abrirFormularioPublicar(id){
   navegar(id ? 'publicar/editar/'+id : 'publicar/nuevo');
@@ -560,28 +728,41 @@ function actualizarCategoriaForm(){
     subWrap.hidden = true;
     subSel.innerHTML = '';
   }
-  const dias = document.getElementById('pubDias');
-  dias.min = cfg.dias.min; dias.max = cfg.dias.max;
-  const actual = Number(dias.value);
-  if(!actual || actual < cfg.dias.min || actual > cfg.dias.max){
-    dias.value = Math.min(cfg.dias.max, Math.max(cfg.dias.min, 15));
+  const esEvento = !!cfg.esEvento;
+  document.getElementById('diasFieldWrap').hidden = esEvento;
+  document.getElementById('fechaEventoField').hidden = !esEvento;
+  if(!esEvento){
+    const dias = document.getElementById('pubDias');
+    dias.min = cfg.dias.min; dias.max = cfg.dias.max;
+    const actual = Number(dias.value);
+    if(!actual || actual < cfg.dias.min || actual > cfg.dias.max){
+      dias.value = Math.min(cfg.dias.max, Math.max(cfg.dias.min, 15));
+    }
+    document.getElementById('diasHint').textContent = `${t('rangoDiasTxt')} ${cfg.dias.min}–${cfg.dias.max}`;
   }
-  document.getElementById('diasHint').textContent = `${t('rangoDiasTxt')} ${cfg.dias.min}–${cfg.dias.max}`;
 }
 document.getElementById('pubTipo').addEventListener('change', actualizarCategoriaForm);
 
 function cargarFormulario(id){
   idEnEdicion = id || null;
-  const p = id ? misPublicaciones.find(x=>x.id===id) : null;
+  origenEdicion = null;
+  let p = null;
+  if(id){
+    p = misPublicaciones.find(x=>x.id===id);
+    if(p) origenEdicion = 'mis';
+    else { p = productos.find(x=>x.id===id); if(p) origenEdicion = 'catalogo'; }
+  }
 
   document.getElementById('publishTitle').textContent = p ? t('editarTitle') : t('publicarTitle');
-  document.getElementById('mercaderNombre').textContent = perfilUsuario.nombre;
+  document.getElementById('mercaderNombre').textContent = p ? p.vendedor : perfilUsuario.nombre;
+  document.querySelector('#pubTipo option[value="Eventos"]').hidden = !adminActivo;
   document.getElementById('pubTipo').value = p ? p.categoria : Object.keys(CATEGORIAS)[0];
   document.getElementById('pubNombre').value = p ? p.nombre : '';
   document.getElementById('pubPrecio').value = p ? p.precio : '';
   document.getElementById('pubInfo').value = p ? p.desc : '';
   document.getElementById('pubNotas').value = '';
   document.getElementById('pubDias').value = p && p.duracionDias ? p.duracionDias : '';
+  document.getElementById('pubFechaEvento').value = p && p.fechaEvento ? p.fechaEvento : '';
   actualizarCategoriaForm();
   if(p && p.subcategoria) document.getElementById('pubSubtipo').value = p.subcategoria;
 
@@ -626,34 +807,73 @@ function renderContactoResumen(){
 }
 
 function guardarPublicacion(){
+  const categoria = document.getElementById('pubTipo').value;
+  if(categoria === 'Eventos' && !adminActivo){ toast('Solo el administrador puede publicar eventos'); return; }
   const nombre = document.getElementById('pubNombre').value.trim();
   if(!nombre){ toast('Ponle un nombre a tu producto o servicio'); return; }
-  const categoria = document.getElementById('pubTipo').value;
   const cfg = CATEGORIAS[categoria] || {dias:{min:1,max:30}, subcategorias:null};
-  let dias = Number(document.getElementById('pubDias').value) || cfg.dias.min;
-  dias = Math.min(Math.max(dias, cfg.dias.min), cfg.dias.max);
-  const fin = new Date(); fin.setDate(fin.getDate() + dias);
-  const datos = {
-    categoria,
-    subcategoria: cfg.subcategorias ? document.getElementById('pubSubtipo').value : null,
-    nombre,
-    precio: document.getElementById('pubPrecio').value.trim() || 'Consultar precio',
-    desc: document.getElementById('pubInfo').value.trim(),
-    vendedor: perfilUsuario.nombre,
-    duracionDias: dias,
-    vigenteHasta: fin.toISOString().slice(0,10),
-    imgs: fotosPreview.length ? [...fotosPreview] : [DEFAULT_IMG],
-    img: fotosPreview[0] || DEFAULT_IMG
-  };
-  if(idEnEdicion){
-    const idx = misPublicaciones.findIndex(x=>x.id===idEnEdicion);
-    if(idx > -1) misPublicaciones[idx] = {...misPublicaciones[idx], ...datos};
-    toast('Cambios guardados');
+  const esEvento = !!cfg.esEvento;
+  const vendedor = esEvento && adminActivo ? 'Alcaldía de Manta' : (origenEdicion==='catalogo' && idEnEdicion)
+    ? ((misPublicaciones.find(x=>x.id===idEnEdicion)||productos.find(x=>x.id===idEnEdicion)||{}).vendedor || perfilUsuario.nombre)
+    : perfilUsuario.nombre;
+
+  let datos;
+  if(esEvento){
+    datos = {
+      categoria, subcategoria: null, nombre,
+      precio: document.getElementById('pubPrecio').value.trim() || 'Entrada libre',
+      desc: document.getElementById('pubInfo').value.trim(),
+      vendedor,
+      fechaEvento: document.getElementById('pubFechaEvento').value || new Date().toISOString().slice(0,10),
+      imgs: fotosPreview.length ? [...fotosPreview] : [DEFAULT_IMG],
+      img: fotosPreview[0] || DEFAULT_IMG
+    };
   } else {
-    misPublicaciones.push({id: Date.now(), ...datos});
-    toast('¡Publicado! Ya aparece en Mis publicaciones');
+    let dias = Number(document.getElementById('pubDias').value) || cfg.dias.min;
+    dias = Math.min(Math.max(dias, cfg.dias.min), cfg.dias.max);
+    const fin = new Date(); fin.setDate(fin.getDate() + dias);
+    datos = {
+      categoria,
+      subcategoria: cfg.subcategorias ? document.getElementById('pubSubtipo').value : null,
+      nombre,
+      precio: document.getElementById('pubPrecio').value.trim() || 'Consultar precio',
+      desc: document.getElementById('pubInfo').value.trim(),
+      vendedor,
+      duracionDias: dias,
+      vigenteHasta: fin.toISOString().slice(0,10),
+      imgs: fotosPreview.length ? [...fotosPreview] : [DEFAULT_IMG],
+      img: fotosPreview[0] || DEFAULT_IMG
+    };
   }
-  navegar('publicar');
+  if(idEnEdicion){
+    if(origenEdicion === 'catalogo'){
+      const idx = productos.findIndex(x=>x.id===idEnEdicion);
+      if(idx > -1) productos[idx] = {...productos[idx], ...datos};
+    } else {
+      const idx = misPublicaciones.findIndex(x=>x.id===idEnEdicion);
+      if(idx > -1) misPublicaciones[idx] = {...misPublicaciones[idx], ...datos};
+    }
+    toast('Cambios guardados');
+    navegar(origenEdicion === 'catalogo' ? 'admin' : 'publicar');
+  } else {
+    if(esEvento && adminActivo){
+      productos.push({id:Date.now(), ...datos});
+      renderCatalogo();
+      toast('Evento publicado en Inicio');
+      navegar('admin');
+    } else {
+      misPublicaciones.push({id: Date.now(), ...datos});
+      toast('¡Publicado! Ya aparece en Mis publicaciones');
+      navegar('publicar');
+    }
+  }
+}
+
+function darDeBajaPublicacion(id){
+  productos = productos.filter(x=>x.id!==id);
+  misPublicaciones = misPublicaciones.filter(x=>x.id!==id);
+  favoritos.delete(id); ls('mantalink-favoritos', JSON.stringify([...favoritos]));
+  reportes = reportes.filter(r=>r.productoId!==id);
 }
 
 function cargarPerfil(){
@@ -687,6 +907,16 @@ function guardarPerfil(){
 
 /* ---------- Sesión (gating de botones) ---------- */
 function actualizarSesion(){
+  const etiquetaRol = document.getElementById('perfilRol');
+  const estadoPerfil = document.getElementById('perfilEstado');
+  if(etiquetaRol){
+    etiquetaRol.textContent = adminActivo ? 'Admin' : (I18N[idiomaActual()] || I18N.es).emprendedorManta;
+    document.getElementById('perfilNombreDisplay').textContent = adminActivo ? 'Administrador' : perfilUsuario.nombre;
+    estadoPerfil.textContent = adminActivo ? 'Cuenta administrativa' : '⏳ Cuenta en verificación';
+    estadoPerfil.hidden = false;
+    document.getElementById('btnEditarPerfil').hidden = adminActivo;
+    document.getElementById('cta-vender-perfil').hidden = adminActivo;
+  }
   document.getElementById('navVender').hidden = !sesionActiva;
   document.getElementById('navFavoritos').hidden = !sesionActiva;
   document.getElementById('navPerfil').hidden = !sesionActiva;
@@ -700,20 +930,24 @@ document.getElementById('btnLogin').addEventListener('click', ()=>{
   const correo = document.getElementById('loginCorreo').value.trim().toLowerCase();
   const clave = document.getElementById('loginPass').value;
   if(correo === ADMIN_CORREO && clave === ADMIN_PASS){
-    adminActivo = true; sesionActiva = false; ls('mantalink-admin','1'); actualizarSesion();
+    adminActivo = true; sesionActiva = true; ls('mantalink-admin','1'); ls('mantalink-sesion','1'); actualizarSesion();
     toast('Bienvenido, administrador'); navegar('admin'); return;
   }
   sesionActiva = true; ls('mantalink-sesion','1'); actualizarSesion();
   toast('¡Bienvenido de nuevo!'); navegar('home');
 });
-document.getElementById('btnLogout').addEventListener('click', ()=>{
-  sesionActiva = false; ls('mantalink-sesion','0'); actualizarSesion();
-  toast('Sesión cerrada'); navegar('home');
-});
-document.getElementById('btnLogoutAdmin').addEventListener('click', ()=>{
-  adminActivo = false; ls('mantalink-admin','0'); actualizarSesion();
-  toast('Sesión de administrador cerrada'); navegar('home');
-});
+function cerrarSesion(){
+  const eraAdmin = adminActivo;
+  sesionActiva = false;
+  adminActivo = false;
+  ls('mantalink-sesion','0');
+  ls('mantalink-admin','0');
+  actualizarSesion();
+  toast(eraAdmin ? 'Sesión de administrador cerrada' : 'Sesión cerrada');
+  navegar('home');
+}
+document.getElementById('btnLogout').addEventListener('click', cerrarSesion);
+document.getElementById('btnLogoutAdmin').addEventListener('click', cerrarSesion);
 document.getElementById('btnEditarPerfil').addEventListener('click', ()=>{
   document.getElementById('perfilEditWrap').hidden = false;
   document.getElementById('btnEditarPerfil').hidden = true;
@@ -778,6 +1012,7 @@ document.getElementById('a11yBtn').addEventListener('click', ()=>{
   applyA11yFabVisible(a11yFabPref === null ? true : a11yFabPref === '1'); // activo por defecto
   sesionActiva = ls('mantalink-sesion') === '1';
   adminActivo = ls('mantalink-admin') === '1';
+  limpiarEventosVencidos();
   actualizarSesion();
   renderCatalogo();
   if(!location.hash) location.hash = '#/home';

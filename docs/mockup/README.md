@@ -33,6 +33,7 @@ mantalink-mockup/
 - **Servicios** — catálogo filtrado de servicios comunitarios (transporte, talleres, hospedaje).
 - **Ingresar / Registro** — formularios con recuperación de contraseña y verificación de datos.
 - **Vender** — panel simulado de "mis productos" para un emprendedor.
+- **Administración** — acceso de demostración con `admin@mail.com` / `admin`; solo el admin puede publicar eventos, que aparecen en Inicio.
 - **Ayuda** — preguntas frecuentes.
 - **Perfil** — datos básicos del usuario.
 
