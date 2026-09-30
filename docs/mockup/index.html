@@ -71,6 +71,10 @@
       </div>
       <div class="adv-filters" id="advFilters" hidden>
         <p class="adv-filters-title">Elige una o varias categorías, y si quieres, una búsqueda más específica dentro de ellas.</p>
+        <div class="field">
+          <label for="filtroUbicacion">Vereda o sector</label>
+          <select id="filtroUbicacion"></select>
+        </div>
         <div class="adv-filters-cats" id="advFiltersCats"></div>
         <div class="field" id="advSubField" hidden>
           <label for="advSubtipo">Búsqueda específica</label>
@@ -130,18 +134,22 @@
       <div class="field"><label for="regPass2">Confirmar contraseña <span class="req">*</span></label><input id="regPass2" type="password" placeholder="••••••••"></div>
       <div class="field"><label for="regTel">Número de teléfono</label><input id="regTel" placeholder="300 000 0000"></div>
       <div class="field"><label for="regCorreo">Correo electrónico <span class="req">*</span></label><input id="regCorreo" placeholder="ana@correo.com"></div>
-      <div class="field"><label for="regVereda">Vereda o barrio donde resides en Manta <span class="req">*</span></label><input id="regVereda" placeholder="Ej: Vereda El Salitre"></div>
+      <div class="field"><label for="regVereda">Vereda o barrio donde resides en Manta <span class="req">*</span></label><select id="regVereda"></select></div>
       <div class="field-check">
         <input type="checkbox" id="chkResidente">
         <label for="chkResidente">Confirmo que resido en el municipio de Manta, Cundinamarca.</label>
       </div>
-      <p style="font-size:.8rem; color:var(--ink-soft); margin:-6px 0 14px">MantaLink es exclusivo para habitantes del municipio. Tu cuenta quedará <strong>pendiente de verificación</strong> por la Junta de Acción Comunal antes de poder publicar productos.</p>
+      <p style="font-size:.8rem; color:var(--ink-soft); margin:-6px 0 14px">MantaLink es exclusivo para habitantes del municipio. Al registrarte verás tu cuenta como <strong>pendiente</strong>; en este mockup, al iniciar sesión se marcará como verificada y podrás publicar.</p>
       <button class="btn btn-primary" style="width:100%; justify-content:center" id="btnRegistro">Crear cuenta</button>
     </div>
   </section>
 
   <!-- VENDER -->
   <section class="screen" id="publicar">
+    <div class="verification-notice" id="avisoVerificacionPublicar" role="status" hidden>
+      <h4>Tu cuenta está pendiente de verificación</h4>
+      <p>Inicia sesión para verificar tu cuenta en este mockup. Después podrás publicar productos y servicios.</p>
+    </div>
     <div class="section-title"><h3 data-i18n="misProductos">Mis productos</h3></div>
     <div class="sell-cta" id="cta-vender" tabindex="0" role="button">
       <strong data-i18n="ctaVender">+ Publicar producto o servicio</strong>
@@ -169,6 +177,10 @@
       <div class="field">
         <label for="pubTipo" data-i18n="tipoLbl">Producto</label>
         <select id="pubTipo"></select>
+      </div>
+      <div class="field">
+        <label for="pubUbicacion">Vereda o sector donde ofreces este producto</label>
+        <select id="pubUbicacion"></select>
       </div>
 
       <div class="field" id="subtipoField" hidden>
@@ -315,7 +327,20 @@
   <!-- ADMIN (solo entra admin@mail.com / admin) -->
   <section class="screen" id="admin">
     <div class="section-title"><h3>Panel de administración</h3></div>
-    <p style="color:var(--ink-soft); max-width:60ch; margin-bottom:20px">Simulación de las tareas del administrador. Elige qué quieres revisar:</p>
+    <p style="color:var(--ink-soft); max-width:60ch; margin-bottom:20px">Indicadores de seguimiento del proyecto y herramientas de administración.</p>
+
+    <section class="bsc-section" aria-labelledby="bscTitle">
+      <div class="bsc-heading">
+        <div>
+          <h4 id="bscTitle">Balanced Scorecard</h4>
+          <p>Seguimiento de las cuatro perspectivas estratégicas.</p>
+        </div>
+        <span class="bsc-demo-label">Avances simulados</span>
+      </div>
+      <div class="bsc-grid" id="bscIndicators"></div>
+    </section>
+
+    <h4 class="admin-tools-title">Gestión de la plataforma</h4>
 
     <div class="admin-dash" id="adminDash">
       <button class="admin-card" data-vista="pendientes">

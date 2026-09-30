@@ -1,36 +1,42 @@
+const UBICACIONES = [
+  "Bermejal", "Cabrera", "Capadocia", "Cubia", "El Bosque", "Fuchatoque", "Juan Gordo",
+  "Madrid", "Manta Grande Abajo", "Manta Grande Arriba", "Minas", "Palmar Abajo",
+  "Palmar Arriba", "Palogordo", "Peñas", "Quimbita", "Salgado", "Salitre", "Centro o casco urbano"
+];
+
 let productos = [
-  {id:1, nombre:"Panela orgánica", categoria:"Alimentos", vendedor:"Trapiche enramada de Bermejal", rating:"★ 4.8", precio:"$8.000 libra", desc:"Panela artesanal molida en trapiche familiar, sin químicos añadidos.",
+  {id:1, nombre:"Panela orgánica", categoria:"Alimentos", ubicacion:"Bermejal", vendedor:"Trapiche enramada de Bermejal", rating:"★ 4.8", precio:"$8.000 libra", desc:"Panela artesanal molida en trapiche familiar, sin químicos añadidos.",
     imgs:["https://upra.gov.co/sites/default/files/styles/webp/public/2025-04/La%20panela%20colombiana%20conquista%20paladares%20en%20todo%20el%20mundo.jpg.webp?itok=z5_-ylRC"]},
-  {id:2, nombre:"Ruana de lana virgen", categoria:"Artesanías", vendedor:"Doña Rosa Tejidos", rating:"★ 4.9", precio:"$385.000", desc:"Tejida a mano con técnicas heredadas de generación en generación.",
+  {id:2, nombre:"Ruana de lana virgen", categoria:"Artesanías", ubicacion:"Palmar Arriba", vendedor:"Doña Rosa Tejidos", rating:"★ 4.9", precio:"$385.000", desc:"Tejida a mano con técnicas heredadas de generación en generación.",
     imgs:["https://static.wixstatic.com/media/478bee_2029d26aec7447bc953625b8c61f0747~mv2.jpg/v1/fill/w_480,h_480,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/478bee_2029d26aec7447bc953625b8c61f0747~mv2.jpg"]},
-  {id:3, nombre:"Recorrido a la laguna", categoria:"Turismo", vendedor:"Guías Manta Rural", rating:"★ 4.7", precio:"$35.000 p/persona", desc:"Caminata ecológica de 2 horas con guía certificado, incluye refrigerio campesino.",
+  {id:3, nombre:"Recorrido a la laguna", categoria:"Turismo", ubicacion:"Palmar Arriba", vendedor:"Guías Manta Rural", rating:"★ 4.7", precio:"$35.000 p/persona", desc:"Caminata ecológica de 2 horas con guía certificado, incluye refrigerio campesino.",
     imgs:["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrJwr4f69e0bwk_ItoluDt4Xm3Sp6gwCq2tT5AXt7oa-S0LKVWdeHGSw_8&s=10",
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAMXlmiG6SPpKH27zU4qTMMoWOfQBIfdVB6g1ip4kiVw&s=10",
           "https://s0.wklcdn.com/image_246/7382818/128231972/81823917.700x525.jpg",
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJcWmf8330qUcqK5ZGYIa-dfsky3imeLk180CNHeHo-A&s=10"]},
-  {id:4, nombre:"Transporte veredal", categoria:"Servicios", vendedor:"Don Efraín", rating:"★ 4.6", precio:"Según destino", desc:"Servicio de transporte entre veredas y casco urbano, disponible todos los días.",
+  {id:4, nombre:"Transporte veredal", categoria:"Servicios", ubicacion:"Manta Grande Abajo", vendedor:"Don Efraín", rating:"★ 4.6", precio:"Según destino", desc:"Servicio de transporte entre veredas y casco urbano, disponible todos los días.",
     imgs:["https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=500"]},
-  {id:5, nombre:"Taller de tejido artesanal", categoria:"Servicios", vendedor:"Doña Rosa Tejidos", rating:"★ 4.9", precio:"$25.000", desc:"Taller de 2 horas para aprender técnicas básicas de tejido.",
+  {id:5, nombre:"Taller de tejido artesanal", categoria:"Servicios", ubicacion:"Salitre", vendedor:"Claudia Mendez", rating:"★ 4.9", precio:"$25.000", desc:"Taller de 2 horas para aprender técnicas básicas de tejido.",
     imgs:["https://elpilon2024.s3.us-west-2.amazonaws.com/2024/05/foto-mochila.jpg"]},
-  {id:6, nombre:"Hotel boutique Corazón del Cielo", categoria:"Servicios", vendedor:"Hotel Boutique Corazón del Cielo", rating:"★ 4.8", precio:"$60.000 noche", desc:"Hospedaje boutique campestre con desayuno incluido, ideal para turistas.",
+  {id:6, nombre:"Hotel boutique Corazón del Cielo", categoria:"Servicios", ubicacion:"Centro o casco urbano", vendedor:"Hotel Boutique Corazón del Cielo", rating:"★ 4.8", precio:"$60.000 noche", desc:"Hospedaje boutique campestre con desayuno incluido, ideal para turistas.",
     imgs:["https://hotelboutiquecorazondelcielo.com/wp-content/uploads/2026/03/39af9076-674b-43e9-9229-490facb7da22-1-768x1024.jpg",
           "https://hotelboutiquecorazondelcielo.com/wp-content/uploads/2026/03/PHOTO-2026-03-28-12-12-09-683x1024.jpg",
           "https://hotelboutiquecorazondelcielo.com/wp-content/uploads/2026/03/c553d869-3c8f-4f88-96da-81906413726a-1005x1536.jpg"]},
-  {id:7, nombre:"Caminata a la quebrada (Cascada El Golpe)", categoria:"Turismo", vendedor:"Guías Manta Rural", rating:"★ Nuevo", precio:"$20.000 p/persona", desc:"Caminata guiada por senderos rurales hasta la cascada El Golpe, con acompañamiento durante todo el recorrido.",
+  {id:7, nombre:"Caminata a la quebrada (Cascada El Golpe)", categoria:"Turismo", ubicacion:"Quimbita", vendedor:"Guías Manta Rural", rating:"★ Nuevo", precio:"$20.000 p/persona", desc:"Caminata guiada por senderos rurales hasta la cascada El Golpe, con acompañamiento durante todo el recorrido.",
     imgs:["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIel6GjfYuNLLNkLYOa9UwHcVSEVhU347m1jEqfYLFLw&s=10",
           "https://caminatasalairelibre.com/wp-content/uploads/2023/06/20-Caminata-Cascada-El-Golpe.jpg"]},
-  {id:8, nombre:"Ternero bovino de levante", categoria:"Animales", subcategoria:"Bovinos", vendedor:"Finca Los Alpes", rating:"★ 4.5", precio:"$950.000", desc:"Ternero sano, vacunado y desparasitado, listo para levante.",
+  {id:8, nombre:"Ternero bovino de levante", categoria:"Animales", subcategoria:"Bovinos", ubicacion:"Juan Gordo", vendedor:"Finca Los Alpes", rating:"★ 4.5", precio:"$3.500.000", desc:"Precio negociable. Ternero sano, vacunado y desparasitado, listo para levante.",
     imgs:["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpL5Yuj33iIrl-OuVTPyoAYsG2XhkygtFcZ7gXMtS6sw&s=10"]},
-  {id:9, nombre:"Panadería La Espiga Dorada", categoria:"Emprendimientos", subcategoria:"Panadería", vendedor:"La Espiga Dorada", rating:"★ 4.9", precio:"Desde $2.000", desc:"Pan campesino, almojábanas y pan de queso recién horneados cada mañana.",
+  {id:9, nombre:"Panadería La Espiga Dorada", categoria:"Emprendimientos", subcategoria:"Panadería", ubicacion:"Capadocia", vendedor:"La Espiga Dorada", rating:"★ 4.9", precio:"Desde $2.000", desc:"Pan campesino, almojábanas y pan de queso recién horneados cada mañana.",
     imgs:["https://images.unsplash.com/photo-1608198093002-ad4e005484ec?auto=format&fit=crop&q=80&w=500"]},
-  {id:10, nombre:"Mazorcas frescas del agro", categoria:"Productos del agro", subcategoria:"Mazorca y cereales", vendedor:"Cultivos El Manantial", rating:"★ 4.7", precio:"$3.000 unidad", desc:"Mazorca recién cosechada, cultivada sin químicos en la vereda.",
+  {id:10, nombre:"Mazorcas frescas del agro", categoria:"Productos del agro", subcategoria:"Mazorca y cereales", ubicacion:"Minas", vendedor:"Cultivos El Manantial", rating:"★ 4.7", precio:"$3.000 unidad", desc:"Mazorca recién cosechada, cultivada sin químicos en la vereda.",
     imgs:["https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&q=80&w=500"]},
-  {id:11, nombre:"Festival de gallina con arepa", categoria:"Eventos", vendedor:"Alcaldía de Manta", rating:"★ Nuevo", precio:"Entrada libre", desc:"Festival gastronómico comunitario con concurso de la mejor gallina con arepa, música en vivo y venta de emprendimientos locales.",
+  {id:11, nombre:"Festival de gallina con arepa", categoria:"Eventos", ubicacion:"Centro o casco urbano", vendedor:"Alcaldía de Manta", rating:"★ Nuevo", precio:"Entrada libre", desc:"Festival gastronómico comunitario con concurso de la mejor gallina con arepa, música en vivo y venta de emprendimientos locales.",
     fechaEvento: (()=>{ const f=new Date(); f.setDate(f.getDate()+12); return f.toISOString().slice(0,10); })(),
         imgs:["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtelTs7T5aS5aMAf3G2BMTfUoet7JOBOFbsxmXOwSe4A&s=10",
           "https://elobservador.com.co/wp-content/uploads/2025/10/560654982_1125835319738366_8795887400586422448_n-768x1024.jpg",
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgy3S-YNtn90e1YTIEPIFq4TW-EanaPkVoR2Qinuoxeg&s=10"]},
-  {id:12, nombre:"Jornada de reciclaje veredal", categoria:"Eventos", vendedor:"Alcaldía de Manta", rating:"★ Nuevo", precio:"Entrada libre", desc:"Jornada comunitaria de reciclaje y limpieza de las veredas — este ya pasó, es de ejemplo para mostrar que los eventos vencidos se quitan solos.",
+  {id:12, nombre:"Jornada de reciclaje veredal", categoria:"Eventos", ubicacion:"El Bosque", vendedor:"Alcaldía de Manta", rating:"★ Nuevo", precio:"Entrada libre", desc:"Jornada comunitaria de reciclaje y limpieza de las veredas — este ya pasó, es de ejemplo para mostrar que los eventos vencidos se quitan solos.",
     fechaEvento: (()=>{ const f=new Date(); f.setDate(f.getDate()-3); return f.toISOString().slice(0,10); })(),
     imgs:["https://images.unsplash.com/photo-1618477388954-7852f32655ec?auto=format&fit=crop&q=80&w=500"]},
 ];
@@ -50,11 +56,15 @@ const CATEGORIAS = {
 let categoriaActiva = "Todos";
 let categoriasFiltroAvanzado = []; // filtros avanzados: varias categorías a la vez
 let subtipoFiltroAvanzado = ''; // búsqueda específica dentro de esas categorías (ej. "Bovinos")
+let ubicacionFiltroActiva = '';
 let sesionActiva = false;
 let favoritos = new Set();
 let vendedoresRating = {}; // {nombreVendedor:{suma,count}} — calificación real, acumulada por reseñas
 let productoActualId = null;
 let ultimaRutaNoDetalle = 'home'; // recuerda si veníamos del catálogo o de servicios, para que "Volver" regrese ahí
+let rutaOrigenDetalle = 'home';
+let scrollOrigenDetalle = 0;
+let restaurarScrollDetalle = false;
 let misPublicaciones = productos.slice(0,2).map(p=>({...p})); // copia editable, independiente del catálogo general
 (function demoVencimientos(){ // ejemplo: una publicación ya vencida y otra vigente, para mostrar ambos estados
   const haceCinco = new Date(); haceCinco.setDate(haceCinco.getDate()-5);
@@ -75,10 +85,21 @@ let cuentasPendientes = [
   {id:2, nombre:'Carlos Rodríguez', vereda:'Barrio Centro', fecha:'2026-09-25'},
   {id:3, nombre:'Yesenia Gómez', vereda:'Vereda La Cabaña', fecha:'2026-09-26'},
 ];
+cuentasPendientes = cargarJSON('mantalink-cuentas-pendientes', cuentasPendientes);
+let cuentasVerificadas = cargarJSON('mantalink-cuentas-verificadas', []);
+let perfilesCuentas = cargarJSON('mantalink-perfiles-cuentas', {});
+let correoSesion = '';
+let cuentaVerificada = false;
 let carTimer = null, carIndex = 0; // estado del carrusel de fotos del detalle
 let miUltimaCalificacion = {}; // {vendedor: estrellas} — mi propio voto, para no acumular infinito al reclicar
 let reportes = []; // {id, productoId, nombre, motivo, comentario, fecha}
 let adminVistaActual = null;
+const INDICADORES_BSC = [
+  {perspectiva:'Financiera', indicador:'Productores vinculados', valor:'32', meta:'Meta: 50 productores / año', avance:64, estado:'64% de avance anual'},
+  {perspectiva:'Clientes', indicador:'Satisfacción de usuarios', valor:'76%', meta:'Meta: mínimo 70%', avance:100, estado:'Meta superada'},
+  {perspectiva:'Procesos internos', indicador:'Tiempo para publicar', valor:'8 min', meta:'Meta: máximo 10 min', avance:100, estado:'Dentro de la meta'},
+  {perspectiva:'Aprendizaje y crecimiento', indicador:'Capacitaciones realizadas', valor:'3 de 4', meta:'Meta: 4 capacitaciones / año', avance:75, estado:'75% de avance anual'},
+];
 
 function limpiarEventosVencidos(){
   // "se borran automáticamente": al pasar la fecha, el evento desaparece del catálogo
@@ -149,6 +170,12 @@ const I18N = {
 };
 
 function ls(key,val){ try{ if(val===undefined) return localStorage.getItem(key); localStorage.setItem(key,val);}catch(e){} }
+function cargarJSON(key, fallback){ try{ const raw = ls(key); return raw ? JSON.parse(raw) : fallback; }catch(e){ return fallback; } }
+function guardarEstadoCuentas(){
+  ls('mantalink-cuentas-pendientes', JSON.stringify(cuentasPendientes));
+  ls('mantalink-cuentas-verificadas', JSON.stringify(cuentasVerificadas));
+  ls('mantalink-perfiles-cuentas', JSON.stringify(perfilesCuentas));
+}
 
 function poblarCategorias(){
   const nombres = Object.keys(CATEGORIAS);
@@ -162,6 +189,19 @@ function poblarCategorias(){
   if(adminCont){
     adminCont.innerHTML = nombres.map(c=>`<span class="chip">${c}</span>`).join('');
   }
+}
+
+function poblarUbicaciones(){
+  const opciones = UBICACIONES.map(ubicacion=>`<option value="${ubicacion}">${ubicacion}</option>`).join('');
+  document.getElementById('filtroUbicacion').innerHTML = `<option value="">Todas las veredas y sectores</option>${opciones}`;
+  document.getElementById('regVereda').innerHTML = `<option value="">Selecciona una vereda o sector</option>${opciones}`;
+  document.getElementById('pubUbicacion').innerHTML = `<option value="">Selecciona una vereda o sector</option>${opciones}`;
+}
+
+function normalizarUbicacion(ubicacion){
+  let nombre = (ubicacion || '').trim().replace(/^(vereda|barrio)\s+/i, '');
+  if(nombre.toLowerCase()==='el salitre') nombre = 'Salitre';
+  return UBICACIONES.find(opcion=>opcion.toLowerCase()===nombre.toLowerCase()) || '';
 }
 
 function actualizarSubtipoAvanzado(){
@@ -182,16 +222,20 @@ document.getElementById('btnFiltrosAvanzados').addEventListener('click', ()=>{
 document.getElementById('btnAplicarFiltros').addEventListener('click', ()=>{
   categoriasFiltroAvanzado = [...document.querySelectorAll('#advFiltersCats input:checked')].map(i=>i.value);
   subtipoFiltroAvanzado = document.getElementById('advSubtipo').value;
+  ubicacionFiltroActiva = document.getElementById('filtroUbicacion').value;
   categoriaActiva = 'Todos';
   document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c.dataset.c==='Todos'));
   document.getElementById('advFilters').hidden = true;
   renderCatalogo();
   const n = categoriasFiltroAvanzado.length;
-  toast(n ? `Filtro aplicado: ${n} categoría${n>1?'s':''}${subtipoFiltroAvanzado ? ' · '+subtipoFiltroAvanzado : ''}` : 'Filtros aplicados');
+  const resumen = [n ? `${n} categoría${n>1?'s':''}${subtipoFiltroAvanzado ? ' · '+subtipoFiltroAvanzado : ''}` : '', ubicacionFiltroActiva].filter(Boolean).join(' · ');
+  toast(resumen ? `Filtros aplicados: ${resumen}` : 'Filtros aplicados');
 });
 document.getElementById('btnLimpiarFiltros').addEventListener('click', ()=>{
   categoriasFiltroAvanzado = []; subtipoFiltroAvanzado = '';
+  ubicacionFiltroActiva = '';
   document.querySelectorAll('#advFiltersCats input').forEach(i=>i.checked=false);
+  document.getElementById('filtroUbicacion').value = '';
   actualizarSubtipoAvanzado();
   renderCatalogo();
   toast('Filtros avanzados limpiados');
@@ -252,6 +296,14 @@ function rutaActual(){
 
 function navegar(ruta){
   // acepta 'home', 'producto/3', etc.
+  const rutaActualNombre = rutaActual().nombre;
+  if(ruta.startsWith('producto/') && rutaActualNombre!=='producto'){
+    rutaOrigenDetalle = rutaActualNombre;
+    scrollOrigenDetalle = window.scrollY;
+  }
+  if(rutaActualNombre==='producto' && ruta===rutaOrigenDetalle){
+    restaurarScrollDetalle = true;
+  }
   if(location.hash === '#/'+ruta) { sincronizarDesdeHash(); return; }
   location.hash = '#/'+ruta;
 }
@@ -264,6 +316,11 @@ function sincronizarDesdeHash(){
   if(RUTAS_PROTEGIDAS.includes(nombre) && !sesionActiva){
     toast(I18N[idiomaActual()].soloResidentes || 'Debes iniciar sesión primero');
     location.hash = '#/login';
+    return;
+  }
+  if(nombre==='publicar' && !adminActivo && !cuentaVerificada && (param==='nuevo' || param==='editar')){
+    toast('Tu cuenta debe ser verificada antes de publicar');
+    location.hash = '#/publicar';
     return;
   }
   if(nombre === 'admin' && !adminActivo){
@@ -291,7 +348,12 @@ function sincronizarDesdeHash(){
   if(nombre==='producto' && param) verDetalle(Number(param));
   if(nombre==='admin') renderAdmin();
 
-  window.scrollTo({top:0, behavior:'smooth'});
+  if(restaurarScrollDetalle && nombre===rutaOrigenDetalle){
+    window.scrollTo(0, scrollOrigenDetalle);
+  } else {
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  restaurarScrollDetalle = false;
 }
 
 function idiomaActual(){ return (ls('mantalink-lang') || 'es'); }
@@ -300,6 +362,8 @@ document.getElementById('chips').addEventListener('click', e=>{
   const b = e.target.closest('.chip'); if(!b) return;
   categoriaActiva = b.dataset.c;
   categoriasFiltroAvanzado = []; subtipoFiltroAvanzado = ''; // un chip simple reemplaza cualquier filtro avanzado activo
+  ubicacionFiltroActiva = '';
+  document.getElementById('filtroUbicacion').value = '';
   document.querySelectorAll('#advFiltersCats input').forEach(i=>i.checked=false);
   document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c===b));
   renderCatalogo();
@@ -365,16 +429,45 @@ function ordenarPorReputacion(lista){
   });
 }
 
+async function compartirProducto(id){
+  const producto = productos.find(item=>item.id===id) || misPublicaciones.find(item=>item.id===id);
+  if(!producto) return;
+  const enlace = new URL(location.href);
+  enlace.hash = `/producto/${id}`;
+  const datosCompartir = {
+    title: producto.nombre,
+    text: `Mira esta publicación en MantaLink: ${producto.nombre}`,
+    url: enlace.href
+  };
+  if(navigator.share){
+    try{
+      await navigator.share(datosCompartir);
+      toast('Publicación compartida');
+      return;
+    }catch(error){
+      if(error.name==='AbortError') return;
+    }
+  }
+  try{
+    await navigator.clipboard.writeText(enlace.href);
+    toast('Enlace copiado para compartir');
+  }catch(error){
+    window.prompt('Copia este enlace para compartir:', enlace.href);
+  }
+}
+
 function tarjetaProducto(p){
   const prom = promedioVendedor(p.vendedor);
   const esFav = favoritos.has(p.id);
   return `
     <div class="card" onclick="navegar('producto/${p.id}')">
       <div class="card-fav ${esFav?'active':''}" role="button" tabindex="0" aria-label="Favorito" onclick="event.stopPropagation(); toggleFavorito(${p.id})">${esFav ? '♥' : '♡'}</div>
+      <button class="card-share" type="button" title="Compartir publicación" aria-label="Compartir ${p.nombre}" onclick="event.stopPropagation(); compartirProducto(${p.id})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4M8.7 13.3l6.6 4.4"/></svg></button>
       <img src="${p.img}" alt="">
       <div class="body">
         <h4>${p.nombre}</h4>
         <div class="seller">${p.vendedor}</div>
+        <div class="product-location">${p.ubicacion || 'Manta'}</div>
         <div class="rating">★ ${prom || 'Nuevo'}</div>
         <button class="btn btn-outline">Más información</button>
       </div>
@@ -386,6 +479,7 @@ function renderCatalogo(){
   const texto = document.getElementById('buscador').value.toLowerCase();
   let visibles = productos.filter(p => {
     if(!p.nombre.toLowerCase().includes(texto)) return false;
+    if(ubicacionFiltroActiva && p.ubicacion !== ubicacionFiltroActiva) return false;
     if(categoriasFiltroAvanzado.length){
       if(!categoriasFiltroAvanzado.includes(p.categoria)) return false;
       if(subtipoFiltroAvanzado && p.subcategoria !== subtipoFiltroAvanzado) return false;
@@ -438,7 +532,7 @@ function verDetalle(id){
         <div class="avatar">${p.vendedor.charAt(0)}</div>
         <div>
           <strong>${p.vendedor}</strong>
-          <div style="font-size:.85rem; color:var(--ink-soft)">${p.categoria}${p.subcategoria ? ' · '+p.subcategoria : ''} · Manta</div>
+          <div style="font-size:.85rem; color:var(--ink-soft)">${p.categoria}${p.subcategoria ? ' · '+p.subcategoria : ''} · ${p.ubicacion || 'Manta'}</div>
           <div class="seller-rating" id="sellerRatingTxt">${prom ? '★ '+prom : t('mercaderNuevo')}</div>
         </div>
       </div>
@@ -475,7 +569,10 @@ function verDetalle(id){
             <div class="field"><label for="reporteComentario">Comentario (opcional)</label>
               <textarea id="reporteComentario" rows="2" placeholder="Cuéntanos qué pasó…"></textarea>
             </div>
-            <button class="btn btn-primary" id="btnEnviarReporte" type="button">Enviar reporte</button>
+            <div class="report-actions">
+              <button class="btn btn-primary" id="btnEnviarReporte" type="button">Enviar reporte</button>
+              <button class="btn btn-outline" id="btnCancelarReporte" type="button">Cancelar</button>
+            </div>
           </div>
         </div>
       `}
@@ -525,6 +622,12 @@ function verDetalle(id){
       document.getElementById('reporteForm').hidden = false;
       document.getElementById('btnMostrarReporte').hidden = true;
     });
+    document.getElementById('btnCancelarReporte').addEventListener('click', ()=>{
+      document.getElementById('reporteMotivo').selectedIndex = 0;
+      document.getElementById('reporteComentario').value = '';
+      document.getElementById('reporteForm').hidden = true;
+      document.getElementById('btnMostrarReporte').hidden = false;
+    });
     document.getElementById('btnEnviarReporte').addEventListener('click', ()=>{
       reportes.push({
         id: Date.now(), productoId: p.id, nombre: p.nombre,
@@ -570,6 +673,11 @@ function diasRestantes(p){
 }
 
 function renderMisProductos(){
+  const puedePublicar = adminActivo || cuentaVerificada;
+  document.getElementById('avisoVerificacionPublicar').hidden = puedePublicar;
+  document.getElementById('cta-vender').hidden = !puedePublicar;
+  document.getElementById('lista-mis-productos').hidden = !puedePublicar;
+  if(!puedePublicar) return;
   document.getElementById('lista-mis-productos').innerHTML = misPublicaciones.map(p=>{
     const restantes = diasRestantes(p);
     const vencido = restantes !== null && restantes < 0;
@@ -609,6 +717,15 @@ function t(clave){ return (I18N[idiomaActual()] || I18N.es)[clave] || clave; }
 
 /* ---------- Admin: dashboard de tarjetas + vistas (simulación) ---------- */
 function renderAdmin(){
+  document.getElementById('bscIndicators').innerHTML = INDICADORES_BSC.map((indicador, indice)=>`
+    <article class="bsc-kpi">
+      <p class="bsc-perspective">${indicador.perspectiva}</p>
+      <h5>${indicador.indicador}</h5>
+      <strong class="bsc-value">${indicador.valor}</strong>
+      <p class="bsc-goal">${indicador.meta}</p>
+      <progress value="${indicador.avance}" max="100" aria-label="${indicador.perspectiva}: ${indicador.estado}"></progress>
+      <span class="bsc-status">${indicador.estado}</span>
+    </article>`).join('');
   document.getElementById('nPendientes').textContent = cuentasPendientes.length;
   document.getElementById('nReportadas').textContent = reportes.length;
   document.getElementById('nPublicaciones').textContent = misPublicaciones.length + productos.length;
@@ -631,7 +748,7 @@ function abrirVistaAdmin(vista){
     cont.innerHTML = `<h4 class="contact-title" style="margin-top:0">Cuentas pendientes de verificación</h4>` + (cuentasPendientes.length
       ? cuentasPendientes.map(c=>`
         <div class="list-row">
-          <div><strong>${c.nombre}</strong><div style="font-size:.85rem; color:var(--ink-soft)">${c.vereda} · solicitó el ${c.fecha}</div></div>
+          <div><strong>${c.nombre}</strong><div style="font-size:.85rem; color:var(--ink-soft)">${c.vereda}${c.correo ? ' · '+c.correo : ''} · solicitó el ${c.fecha}</div></div>
           <div class="list-row-actions">
             <button class="btn btn-primary" onclick="aprobarCuenta(${c.id})">Verificar</button>
             <button class="btn btn-outline" onclick="rechazarCuenta(${c.id})">Rechazar</button>
@@ -689,11 +806,16 @@ function abrirVistaAdmin(vista){
 function aprobarCuenta(id){
   const c = cuentasPendientes.find(x=>x.id===id);
   cuentasPendientes = cuentasPendientes.filter(x=>x.id!==id);
+  if(c && c.correo && !cuentasVerificadas.includes(c.correo)) cuentasVerificadas.push(c.correo);
+  guardarEstadoCuentas();
   toast(c ? `Cuenta de ${c.nombre} verificada` : 'Cuenta verificada');
   abrirVistaAdmin('pendientes');
 }
 function rechazarCuenta(id){
+  const c = cuentasPendientes.find(x=>x.id===id);
   cuentasPendientes = cuentasPendientes.filter(x=>x.id!==id);
+  if(c && c.correo) delete perfilesCuentas[c.correo];
+  guardarEstadoCuentas();
   toast('Solicitud rechazada');
   abrirVistaAdmin('pendientes');
 }
@@ -757,6 +879,7 @@ function cargarFormulario(id){
   document.getElementById('mercaderNombre').textContent = p ? p.vendedor : perfilUsuario.nombre;
   document.querySelector('#pubTipo option[value="Eventos"]').hidden = !adminActivo;
   document.getElementById('pubTipo').value = p ? p.categoria : Object.keys(CATEGORIAS)[0];
+  document.getElementById('pubUbicacion').value = p ? (p.ubicacion || '') : normalizarUbicacion(perfilUsuario.vereda);
   document.getElementById('pubNombre').value = p ? p.nombre : '';
   document.getElementById('pubPrecio').value = p ? p.precio : '';
   document.getElementById('pubInfo').value = p ? p.desc : '';
@@ -807,8 +930,11 @@ function renderContactoResumen(){
 }
 
 function guardarPublicacion(){
+  if(!adminActivo && !cuentaVerificada){ toast('Tu cuenta debe ser verificada antes de publicar'); return; }
   const categoria = document.getElementById('pubTipo').value;
   if(categoria === 'Eventos' && !adminActivo){ toast('Solo el administrador puede publicar eventos'); return; }
+  const ubicacion = document.getElementById('pubUbicacion').value;
+  if(!ubicacion){ toast('Selecciona la vereda o sector de la publicación'); return; }
   const nombre = document.getElementById('pubNombre').value.trim();
   if(!nombre){ toast('Ponle un nombre a tu producto o servicio'); return; }
   const cfg = CATEGORIAS[categoria] || {dias:{min:1,max:30}, subcategorias:null};
@@ -820,7 +946,7 @@ function guardarPublicacion(){
   let datos;
   if(esEvento){
     datos = {
-      categoria, subcategoria: null, nombre,
+      categoria, subcategoria: null, ubicacion, nombre,
       precio: document.getElementById('pubPrecio').value.trim() || 'Entrada libre',
       desc: document.getElementById('pubInfo').value.trim(),
       vendedor,
@@ -834,6 +960,7 @@ function guardarPublicacion(){
     const fin = new Date(); fin.setDate(fin.getDate() + dias);
     datos = {
       categoria,
+      ubicacion,
       subcategoria: cfg.subcategorias ? document.getElementById('pubSubtipo').value : null,
       nombre,
       precio: document.getElementById('pubPrecio').value.trim() || 'Consultar precio',
@@ -876,8 +1003,14 @@ function darDeBajaPublicacion(id){
   reportes = reportes.filter(r=>r.productoId!==id);
 }
 
-function cargarPerfil(){
-  try{ const raw = ls('mantalink-perfil'); if(raw) perfilUsuario = {...perfilUsuario, ...JSON.parse(raw)}; }catch(e){}
+function cargarPerfil(correo = correoSesion){
+  if(correo) correoSesion = correo;
+  const perfilGuardado = correoSesion && perfilesCuentas[correoSesion];
+  if(perfilGuardado){
+    perfilUsuario = {...perfilUsuario, ...perfilGuardado};
+  } else {
+    try{ const raw = ls('mantalink-perfil'); if(raw) perfilUsuario = {...perfilUsuario, ...JSON.parse(raw)}; }catch(e){}
+  }
   document.getElementById('perfilNombreDisplay').textContent = perfilUsuario.nombre;
   document.getElementById('perfilNombre').value = perfilUsuario.nombre;
   document.getElementById('perfilTelefono').value = perfilUsuario.telefono;
@@ -899,6 +1032,7 @@ function guardarPerfil(){
     tiktok: document.getElementById('perfilTiktok').value.trim(),
   };
   ls('mantalink-perfil', JSON.stringify(perfilUsuario));
+  if(correoSesion){ perfilesCuentas[correoSesion] = {...perfilUsuario}; guardarEstadoCuentas(); }
   document.getElementById('perfilNombreDisplay').textContent = perfilUsuario.nombre;
   document.getElementById('perfilEditWrap').hidden = true;
   document.getElementById('btnEditarPerfil').hidden = false;
@@ -912,10 +1046,11 @@ function actualizarSesion(){
   if(etiquetaRol){
     etiquetaRol.textContent = adminActivo ? 'Admin' : (I18N[idiomaActual()] || I18N.es).emprendedorManta;
     document.getElementById('perfilNombreDisplay').textContent = adminActivo ? 'Administrador' : perfilUsuario.nombre;
-    estadoPerfil.textContent = adminActivo ? 'Cuenta administrativa' : '⏳ Cuenta en verificación';
+    estadoPerfil.textContent = adminActivo ? 'Cuenta administrativa' : cuentaVerificada ? 'Cuenta verificada' : 'Cuenta pendiente de verificación';
+    estadoPerfil.classList.toggle('badge-verified', !adminActivo && cuentaVerificada);
     estadoPerfil.hidden = false;
     document.getElementById('btnEditarPerfil').hidden = adminActivo;
-    document.getElementById('cta-vender-perfil').hidden = adminActivo;
+    document.getElementById('cta-vender-perfil').hidden = adminActivo || !cuentaVerificada;
   }
   document.getElementById('navVender').hidden = !sesionActiva;
   document.getElementById('navFavoritos').hidden = !sesionActiva;
@@ -929,12 +1064,24 @@ function actualizarSesion(){
 document.getElementById('btnLogin').addEventListener('click', ()=>{
   const correo = document.getElementById('loginCorreo').value.trim().toLowerCase();
   const clave = document.getElementById('loginPass').value;
+  if(!correo || !clave){ toast('Ingresa tu correo y contraseña'); return; }
   if(correo === ADMIN_CORREO && clave === ADMIN_PASS){
-    adminActivo = true; sesionActiva = true; ls('mantalink-admin','1'); ls('mantalink-sesion','1'); actualizarSesion();
+    correoSesion = correo; cuentaVerificada = true;
+    adminActivo = true; sesionActiva = true; ls('mantalink-cuenta-correo', correo); ls('mantalink-admin','1'); ls('mantalink-sesion','1'); actualizarSesion();
     toast('Bienvenido, administrador'); navegar('admin'); return;
   }
+  correoSesion = correo;
+  cargarPerfil(correo);
+  cuentaVerificada = true;
+  if(!cuentasVerificadas.includes(correo)) cuentasVerificadas.push(correo);
+  cuentasPendientes = cuentasPendientes.filter(cuenta=>cuenta.correo!==correo);
+  if(!perfilesCuentas[correo]) perfilUsuario = {...perfilUsuario, correo};
+  perfilesCuentas[correo] = {...perfilUsuario};
+  guardarEstadoCuentas();
+  ls('mantalink-perfil', JSON.stringify(perfilUsuario));
+  ls('mantalink-cuenta-correo', correo);
   sesionActiva = true; ls('mantalink-sesion','1'); actualizarSesion();
-  toast('¡Bienvenido de nuevo!'); navegar('home');
+  toast('Cuenta verificada. ¡Bienvenido!'); navegar('home');
 });
 function cerrarSesion(){
   const eraAdmin = adminActivo;
@@ -953,14 +1100,37 @@ document.getElementById('btnEditarPerfil').addEventListener('click', ()=>{
   document.getElementById('btnEditarPerfil').hidden = true;
 });
 document.getElementById('btnRegistro').addEventListener('click', ()=>{
+  const nombre = document.getElementById('regNombre').value.trim();
+  const correo = document.getElementById('regCorreo').value.trim().toLowerCase();
+  const clave = document.getElementById('regPass').value;
+  const confirmarClave = document.getElementById('regPass2').value;
   const vereda = document.getElementById('regVereda').value.trim();
   const confirmado = document.getElementById('chkResidente').checked;
+  if(!nombre || !correo || !clave || !confirmarClave || clave !== confirmarClave){
+    toast('Completa nombre, correo y contraseñas iguales');
+    return;
+  }
   if(!confirmado || !vereda){
     toast('Debes indicar tu vereda/barrio y confirmar que resides en Manta');
     return;
   }
+  if(correo === ADMIN_CORREO || cuentasPendientes.some(c=>c.correo===correo) || cuentasVerificadas.includes(correo)){
+    toast('Ese correo ya tiene una cuenta o solicitud');
+    return;
+  }
+  correoSesion = correo;
+  cuentaVerificada = false;
+  perfilUsuario = {
+    nombre, correo, telefono:document.getElementById('regTel').value.trim(), vereda,
+    instagram:'', facebook:'', tiktok:''
+  };
+  perfilesCuentas[correo] = {...perfilUsuario};
+  cuentasPendientes.push({id:Date.now(), nombre, correo, vereda, fecha:new Date().toISOString().slice(0,10)});
+  guardarEstadoCuentas();
+  ls('mantalink-perfil', JSON.stringify(perfilUsuario));
+  ls('mantalink-cuenta-correo', correo);
   sesionActiva = true; ls('mantalink-sesion','1'); actualizarSesion();
-  toast('¡Cuenta creada! Queda pendiente de verificación por la Junta de Acción Comunal.');
+  toast('Solicitud enviada. Tu cuenta queda pendiente de verificación.');
   navegar('perfil');
 });
 
@@ -1001,10 +1171,14 @@ document.getElementById('a11yBtn').addEventListener('click', ()=>{
 /* ---------- Inicialización ---------- */
 (function init(){
   cargarPerfil();
+  correoSesion = ls('mantalink-cuenta-correo') || perfilUsuario.correo;
+  cargarPerfil(correoSesion);
+  cuentaVerificada = cuentasVerificadas.includes(correoSesion);
   try{ const raw = ls('mantalink-favoritos'); if(raw) favoritos = new Set(JSON.parse(raw)); }catch(e){}
   try{ const rawR = ls('mantalink-ratings'); if(rawR) vendedoresRating = JSON.parse(rawR); }catch(e){}
   try{ const rawM = ls('mantalink-mirating'); if(rawM) miUltimaCalificacion = JSON.parse(rawM); }catch(e){}
   poblarCategorias();
+  poblarUbicaciones();
   applyTheme(ls('mantalink-theme') || 'manta');
   applyTextSize(ls('mantalink-textsize') || 'normal');
   applyLang(ls('mantalink-lang') || 'es');
