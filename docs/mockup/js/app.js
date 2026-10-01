@@ -1,3 +1,4 @@
+/* Datos de demostración: ubicaciones, productos y vendedores no representan un padrón real. */
 const UBICACIONES = [
   "Bermejal", "Cabrera", "Capadocia", "Cubia", "El Bosque", "Fuchatoque", "Juan Gordo",
   "Madrid", "Manta Grande Abajo", "Manta Grande Arriba", "Minas", "Palmar Abajo",
@@ -41,8 +42,7 @@ let productos = [
     imgs:["https://images.unsplash.com/photo-1618477388954-7852f32655ec?auto=format&fit=crop&q=80&w=500"]},
 ];
 productos.forEach(p=>{ p.img = p.imgs[0]; }); // portada = primera foto, para no romper las tarjetas del catálogo
-// Categorías: días mín/máx de publicación por tipo (ejemplo razonable, ajústalo si no cuadra)
-// y subcategorías donde aplica. Un animal vivo dura poco publicado; una artesanía no caduca.
+// Reglas de vigencia y subcategorías usadas por el formulario de publicación.
 const CATEGORIAS = {
   "Alimentos":        {dias:{min:1, max:60}, subcategorias:null},
   "Artesanías":       {dias:{min:1, max:90}, subcategorias:null},
@@ -53,6 +53,7 @@ const CATEGORIAS = {
   "Productos del agro":{dias:{min:1, max:30}, subcategorias:["Frutas","Verduras","Tubérculos","Mazorca y cereales","Otros"]},
   "Eventos":          {esEvento:true, subcategorias:null} // se publican con una fecha puntual y se borran solos al pasar
 };
+/* Estado temporal de navegación y formularios. La persistencia local se concentra más abajo. */
 let categoriaActiva = "Todos";
 let categoriasFiltroAvanzado = []; // filtros avanzados: varias categorías a la vez
 let subtipoFiltroAvanzado = ''; // búsqueda específica dentro de esas categorías (ej. "Bovinos")
@@ -60,11 +61,9 @@ let ubicacionFiltroActiva = '';
 let sesionActiva = false;
 let favoritos = new Set();
 let vendedoresRating = {}; // {nombreVendedor:{suma,count}} — calificación real, acumulada por reseñas
-let productoActualId = null;
 let ultimaRutaNoDetalle = 'home'; // recuerda si veníamos del catálogo o de servicios, para que "Volver" regrese ahí
-let rutaOrigenDetalle = 'home';
-let scrollOrigenDetalle = 0;
-let restaurarScrollDetalle = false;
+let rutaOrigenPerfilVendedor = 'home';
+const scrollPorRuta = new Map();
 let misPublicaciones = productos.slice(0,2).map(p=>({...p})); // copia editable, independiente del catálogo general
 (function demoVencimientos(){ // ejemplo: una publicación ya vencida y otra vigente, para mostrar ambos estados
   const haceCinco = new Date(); haceCinco.setDate(haceCinco.getDate()-5);
@@ -93,7 +92,7 @@ let cuentaVerificada = false;
 let carTimer = null, carIndex = 0; // estado del carrusel de fotos del detalle
 let miUltimaCalificacion = {}; // {vendedor: estrellas} — mi propio voto, para no acumular infinito al reclicar
 let reportes = []; // {id, productoId, nombre, motivo, comentario, fecha}
-let adminVistaActual = null;
+// Indicadores de ejemplo: los avances no se calculan desde registros reales.
 const INDICADORES_BSC = [
   {perspectiva:'Financiera', indicador:'Productores vinculados', valor:'32', meta:'Meta: 50 productores / año', avance:64, estado:'64% de avance anual'},
   {perspectiva:'Clientes', indicador:'Satisfacción de usuarios', valor:'76%', meta:'Meta: mínimo 70%', avance:100, estado:'Meta superada'},
@@ -114,7 +113,7 @@ const I18N = {
       destacados:"Destacados esta semana",misProductos:"Mis publicaciones",volver:"← Volver al catálogo",
       serviciosTitle:"Servicios comunitarios",serviciosDesc:"Además de productos, en MantaLink puedes ofrecer o encontrar servicios como transporte, talleres y hospedaje rural.",
       ayudaTitle:"Centro de ayuda",loginTitle:"Ingresar a tu cuenta",loginDesc:"Para publicar y gestionar tus productos.",
-      cerrarSesion:"Cerrar sesión",cfgTitle:"Configuración",cfgTheme:"Tema de color",cfgThemeManta:"Manta (predeterminado)",
+      cerrarSesion:"Cerrar sesión",cfgTitle:"Configuración",cfgTheme:"Tema de color",cfgThemeManta:"Manta",
       cfgThemeOscuro:"Modo oscuro",cfgThemeClasico:"Verde clásico",cfgTextSize:"Tamaño de letra",cfgNormal:"Normal",
       cfgGrande:"Grande",cfgLang:"Idioma",skipLink:"Saltar al contenido",
       cfgA11y:"Accesibilidad",cfgA11yFab:"Botón flotante \"A+\" para agrandar la letra",
@@ -143,7 +142,7 @@ const I18N = {
       destacados:"Featured this week",misProductos:"My listings",volver:"← Back to catalog",
       serviciosTitle:"Community services",serviciosDesc:"Besides products, MantaLink lets you offer or find services like transport, workshops and rural lodging.",
       ayudaTitle:"Help center",loginTitle:"Log in to your account",loginDesc:"To publish and manage your products.",
-      cerrarSesion:"Log out",cfgTitle:"Settings",cfgTheme:"Color theme",cfgThemeManta:"Manta (default)",
+      cerrarSesion:"Log out",cfgTitle:"Settings",cfgTheme:"Color theme",cfgThemeManta:"Manta",
       cfgThemeOscuro:"Dark mode",cfgThemeClasico:"Classic green",cfgTextSize:"Text size",cfgNormal:"Normal",
       cfgGrande:"Large",cfgLang:"Language",skipLink:"Skip to content",
       cfgA11y:"Accessibility",cfgA11yFab:"Floating \"A+\" button to enlarge text",
@@ -169,6 +168,7 @@ const I18N = {
       republicadaTxt:"Listing renewed!",eliminadaTxt:"Listing deleted"}
 };
 
+// localStorage puede no estar disponible en ciertos contextos; el mockup sigue funcionando sin él.
 function ls(key,val){ try{ if(val===undefined) return localStorage.getItem(key); localStorage.setItem(key,val);}catch(e){} }
 function cargarJSON(key, fallback){ try{ const raw = ls(key); return raw ? JSON.parse(raw) : fallback; }catch(e){ return fallback; } }
 function guardarEstadoCuentas(){
@@ -177,6 +177,7 @@ function guardarEstadoCuentas(){
   ls('mantalink-perfiles-cuentas', JSON.stringify(perfilesCuentas));
 }
 
+// Regenera los chips, selectores y checks de categoría, incluido el panel admin.
 function poblarCategorias(){
   const nombres = Object.keys(CATEGORIAS);
   document.getElementById('chips').innerHTML = ['Todos', ...nombres].map(c=>
@@ -191,6 +192,7 @@ function poblarCategorias(){
   }
 }
 
+// Rellena los selectores de ubicación de búsqueda, registro y publicación.
 function poblarUbicaciones(){
   const opciones = UBICACIONES.map(ubicacion=>`<option value="${ubicacion}">${ubicacion}</option>`).join('');
   document.getElementById('filtroUbicacion').innerHTML = `<option value="">Todas las veredas y sectores</option>${opciones}`;
@@ -281,10 +283,11 @@ function toast(msg){
 
 /* ---------- Router (hash-based: funciona sin servidor, ej. abriendo el archivo directo) ---------- */
 // Ruta pública -> id de <section class="screen">
+// Las rutas hash permiten abrir el archivo sin servidor y restaurar scroll por pantalla.
 const RUTA_A_PANTALLA = {
   home:'inicio', login:'login', registro:'registro', servicios:'servicios-info',
   favoritos:'favoritos-info', ayuda:'ayuda', publicar:'publicar', perfil:'perfil',
-  config:'config', producto:'detalle', admin:'admin'
+  config:'config', producto:'detalle', vendedor:'perfil-vendedor', admin:'admin'
 };
 const RUTAS_PROTEGIDAS = ['publicar','perfil'];
 // Rutas: #/publicar (mis publicaciones) · #/publicar/nuevo · #/publicar/editar/ID
@@ -296,16 +299,10 @@ function rutaActual(){
 
 function navegar(ruta){
   // acepta 'home', 'producto/3', etc.
-  const rutaActualNombre = rutaActual().nombre;
-  if(ruta.startsWith('producto/') && rutaActualNombre!=='producto'){
-    rutaOrigenDetalle = rutaActualNombre;
-    scrollOrigenDetalle = window.scrollY;
-  }
-  if(rutaActualNombre==='producto' && ruta===rutaOrigenDetalle){
-    restaurarScrollDetalle = true;
-  }
-  if(location.hash === '#/'+ruta) { sincronizarDesdeHash(); return; }
-  location.hash = '#/'+ruta;
+  const destino = '#/'+ruta;
+  if(location.hash === destino) return;
+  if(location.hash) scrollPorRuta.set(location.hash, window.scrollY);
+  location.hash = destino;
 }
 
 function sincronizarDesdeHash(){
@@ -340,20 +337,21 @@ function sincronizarDesdeHash(){
   document.getElementById('mainnav').classList.remove('open');
   document.getElementById('menuToggle').setAttribute('aria-expanded','false');
   actualizarSesion(); // por seguridad: re-sincroniza qué botones deben verse en cada navegación
-  if(nombre !== 'producto') ultimaRutaNoDetalle = nombre;
+  if(nombre !== 'producto' && nombre !== 'vendedor') ultimaRutaNoDetalle = location.hash.replace(/^#\/?/,'') || nombre;
 
   if(nombre==='publicar'){ if(enFormulario) cargarFormulario(idEditar); else renderMisProductos(); }
   if(nombre==='servicios') renderServicios();
   if(nombre==='favoritos') renderFavoritos();
   if(nombre==='producto' && param) verDetalle(Number(param));
+  if(nombre==='vendedor' && param) renderPerfilVendedor(param);
   if(nombre==='admin') renderAdmin();
 
-  if(restaurarScrollDetalle && nombre===rutaOrigenDetalle){
-    window.scrollTo(0, scrollOrigenDetalle);
+  const posicionGuardada = scrollPorRuta.get(location.hash);
+  if(posicionGuardada !== undefined){
+    window.scrollTo(0, posicionGuardada);
   } else {
     window.scrollTo({top:0, behavior:'smooth'});
   }
-  restaurarScrollDetalle = false;
 }
 
 function idiomaActual(){ return (ls('mantalink-lang') || 'es'); }
@@ -371,6 +369,7 @@ document.getElementById('chips').addEventListener('click', e=>{
 document.getElementById('buscador').addEventListener('input', renderCatalogo);
 document.getElementById('olvide').addEventListener('click', ()=>toast('Se enviaría un enlace de recuperación a tu correo'));
 document.getElementById('backBtn').addEventListener('click', ()=>navegar(ultimaRutaNoDetalle));
+document.getElementById('backPerfilVendedor').addEventListener('click', ()=>navegar(rutaOrigenPerfilVendedor));
 document.getElementById('backPublicarBtn').addEventListener('click', ()=>navegar('publicar'));
 document.getElementById('cta-vender').addEventListener('click', ()=>abrirFormularioPublicar(null));
 document.getElementById('cta-vender-perfil').addEventListener('click', ()=>abrirFormularioPublicar(null));
@@ -398,7 +397,7 @@ document.addEventListener('click', ()=>{
 });
 
 document.getElementById('btnRestaurarConfig').addEventListener('click', ()=>{
-  applyTheme('manta'); applyTextSize('normal'); applyLang('es'); applyA11yFabVisible(true);
+  applyTheme('manta'); applyTextSize('grande'); applyLang('es'); applyA11yFabVisible(true);
   toast('Configuración restaurada');
 });
 document.getElementById('menuToggle').addEventListener('click', ()=>{
@@ -417,6 +416,7 @@ document.addEventListener('click', e=>{
 });
 
 window.addEventListener('hashchange', sincronizarDesdeHash);
+if('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 function ordenarPorReputacion(lista){
   // los mercaderes mejor calificados salen primero; los nuevos (sin reseñas) quedan de últimos, no ocultos
@@ -429,6 +429,7 @@ function ordenarPorReputacion(lista){
   });
 }
 
+// Usa Web Share en dispositivos compatibles y ofrece copiar el enlace como alternativa.
 async function compartirProducto(id){
   const producto = productos.find(item=>item.id===id) || misPublicaciones.find(item=>item.id===id);
   if(!producto) return;
@@ -456,6 +457,7 @@ async function compartirProducto(id){
   }
 }
 
+// Las acciones superpuestas detienen el clic de la tarjeta, que abre el detalle.
 function tarjetaProducto(p){
   const prom = promedioVendedor(p.vendedor);
   const esFav = favoritos.has(p.id);
@@ -474,6 +476,7 @@ function tarjetaProducto(p){
     </div>`;
 }
 
+// Combina búsqueda por texto con categoría, subtipo y ubicación aplicados.
 function renderCatalogo(){
   limpiarEventosVencidos();
   const texto = document.getElementById('buscador').value.toLowerCase();
@@ -505,10 +508,41 @@ function renderServicios(){
   document.getElementById('grid-servicios').innerHTML = servicios.map(tarjetaProducto).join('');
 }
 
+// El nombre se codifica en la ruta para admitir espacios y caracteres acentuados.
+function abrirPerfilVendedor(nombreCodificado){
+  const ruta = `vendedor/${nombreCodificado}`;
+  if(location.hash==='#/'+ruta) return;
+  rutaOrigenPerfilVendedor = location.hash.replace(/^#\/?/,'') || 'home';
+  navegar(ruta);
+}
+
+function renderPerfilVendedor(nombreCodificado){
+  let nombre;
+  try{ nombre = decodeURIComponent(nombreCodificado); }catch(error){ navegar('home'); return; }
+  const publicaciones = [...productos, ...misPublicaciones]
+    .filter(p=>p.vendedor===nombre)
+    .filter((p, indice, lista)=>lista.findIndex(item=>item.id===p.id)===indice);
+  if(!publicaciones.length){ toast('No encontramos publicaciones de este vendedor'); navegar('home'); return; }
+  const ubicaciones = [...new Set(publicaciones.map(p=>p.ubicacion).filter(Boolean))];
+  const categorias = [...new Set(publicaciones.map(p=>p.categoria))];
+  const rating = promedioVendedor(nombre);
+  document.getElementById('perfilVendedorContenido').innerHTML = `
+    <div class="seller-public-header">
+      <div class="avatar" aria-hidden="true">${nombre.trim().charAt(0)}</div>
+      <div>
+        <p class="seller-public-eyebrow">Perfil del productor</p>
+        <h2>${nombre}</h2>
+        <p>${ubicaciones.join(' · ') || 'Manta'} · ${publicaciones.length} ${publicaciones.length===1?'publicación':'publicaciones'}${rating ? ` · ★ ${rating}` : ''}</p>
+        <p>${categorias.join(' · ')}</p>
+      </div>
+    </div>
+    <div class="section-title"><h3>Publicaciones de ${nombre}</h3></div>
+    <div class="grid">${ordenarPorReputacion(publicaciones).map(tarjetaProducto).join('')}</div>`;
+}
+
 function verDetalle(id){
   const p = productos.find(x=>x.id===id) || misPublicaciones.find(x=>x.id===id);
   if(!p){ navegar('home'); return; }
-  productoActualId = id;
   clearInterval(carTimer); carIndex = 0;
   const imgs = (p.imgs && p.imgs.length) ? p.imgs : [p.img];
   const prom = promedioVendedor(p.vendedor);
@@ -531,7 +565,7 @@ function verDetalle(id){
       <div class="seller-box">
         <div class="avatar">${p.vendedor.charAt(0)}</div>
         <div>
-          <strong>${p.vendedor}</strong>
+          <button class="seller-profile-link" type="button" onclick="abrirPerfilVendedor('${encodeURIComponent(p.vendedor)}')">${p.vendedor}</button>
           <div style="font-size:.85rem; color:var(--ink-soft)">${p.categoria}${p.subcategoria ? ' · '+p.subcategoria : ''} · ${p.ubicacion || 'Manta'}</div>
           <div class="seller-rating" id="sellerRatingTxt">${prom ? '★ '+prom : t('mercaderNuevo')}</div>
         </div>
@@ -732,14 +766,12 @@ function renderAdmin(){
   document.getElementById('nCategorias').textContent = Object.keys(CATEGORIAS).length;
   document.getElementById('adminVistaWrap').hidden = true;
   document.getElementById('adminDash').hidden = false;
-  adminVistaActual = null;
 }
 
 document.querySelectorAll('#adminDash .admin-card').forEach(b=>b.addEventListener('click', ()=>abrirVistaAdmin(b.dataset.vista)));
 document.getElementById('btnVolverDash').addEventListener('click', renderAdmin);
 
 function abrirVistaAdmin(vista){
-  adminVistaActual = vista;
   document.getElementById('adminDash').hidden = true;
   document.getElementById('adminVistaWrap').hidden = false;
   const cont = document.getElementById('adminVistaContenido');
@@ -1061,6 +1093,7 @@ function actualizarSesion(){
   document.getElementById('bnPerfil').hidden = !sesionActiva;
   document.getElementById('bnLogin').hidden = sesionActiva || adminActivo;
 }
+// Login de demostración: el admin usa credenciales fijas; cualquier usuario con ambos campos se marca verificado.
 document.getElementById('btnLogin').addEventListener('click', ()=>{
   const correo = document.getElementById('loginCorreo').value.trim().toLowerCase();
   const clave = document.getElementById('loginPass').value;
@@ -1180,7 +1213,7 @@ document.getElementById('a11yBtn').addEventListener('click', ()=>{
   poblarCategorias();
   poblarUbicaciones();
   applyTheme(ls('mantalink-theme') || 'manta');
-  applyTextSize(ls('mantalink-textsize') || 'normal');
+  applyTextSize(ls('mantalink-textsize') || 'grande');
   applyLang(ls('mantalink-lang') || 'es');
   const a11yFabPref = ls('mantalink-a11yfab');
   applyA11yFabVisible(a11yFabPref === null ? true : a11yFabPref === '1'); // activo por defecto

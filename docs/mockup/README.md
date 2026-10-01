@@ -1,59 +1,59 @@
 # MantaLink — Mockup web
 
-Mockup interactivo del portal digital comunitario **MantaLink**, desarrollado como parte del
-proyecto de grado *"Portal Digital Comunitario como Sistema de Información Estratégico para la
-Promoción de Emprendimientos Locales"*.
+Prototipo navegable del portal comunitario MantaLink para explorar productos, servicios, eventos y emprendimientos de Manta. Este mockup representa flujos y decisiones de interfaz; no es un sistema de producción ni se conecta a un backend.
 
-> Este mockup es una guía de referencia, no la versión final del sistema. Su objetivo es
-> representar la estructura, navegación y estilo visual del portal antes del desarrollo técnico
-> real, en línea con los prototipos de baja y alta fidelidad presentados en el documento del
-> proyecto.
+## Abrir el mockup
 
-## Cómo verlo
+Abre `index.html` directamente en un navegador. No requiere instalación, compilación ni servidor local. La tipografía y las fotografías remotas necesitan conexión a internet; el resto de la interfaz funciona como archivos estáticos.
 
-Solo abre `index.html` en el navegador (doble clic, o clic derecho → "Abrir con..."). No necesita
-servidor ni instalación: es HTML, CSS y JavaScript planos.
+## Estructura
 
-## Estructura del proyecto
-
-```
-mantalink-mockup/
-├── index.html        # Estructura de las pantallas (inicio, detalle, login, registro, etc.)
-├── css/
-│   └── styles.css    # Estilos: colores, tipografía, layout responsive
-├── js/
-│   └── app.js         # Navegación entre pantallas y datos de ejemplo (mock data)
-└── README.md          # Este archivo
+```text
+docs/mockup/
+├── index.html       Estructura de las pantallas y controles
+├── css/styles.css   Temas, componentes y diseño adaptable
+├── js/app.js        Datos de ejemplo, navegación y comportamiento
+└── README.md        Esta guía
 ```
 
-## Pantallas incluidas
+## Funcionalidades
 
-- **Inicio** — buscador, filtros por categoría y catálogo de productos destacados.
-- **Detalle de producto** — descripción, vendedor y botones de contacto (WhatsApp / llamada).
-- **Servicios** — catálogo filtrado de servicios comunitarios (transporte, talleres, hospedaje).
-- **Ingresar / Registro** — formularios con recuperación de contraseña y verificación de datos.
-- **Vender** — panel simulado de "mis productos" para un emprendedor.
-- **Administración** — acceso de demostración con `admin@mail.com` / `admin`; solo el admin puede publicar eventos, que aparecen en Inicio.
-- **Ayuda** — preguntas frecuentes.
-- **Perfil** — datos básicos del usuario.
+- Catálogo con búsqueda por nombre, categorías y ubicación; los filtros avanzados se aplican juntos.
+- Detalle de producto con imágenes, calificación y acceso al perfil público del vendedor.
+- Perfiles públicos que agrupan las publicaciones de cada vendedor. El enlace al perfil está en el detalle de la publicación.
+- Compartir tarjetas mediante el menú nativo del dispositivo o copiando el enlace directo.
+- Registro, inicio de sesión simulado, perfil y gestión local de publicaciones.
+- Publicación de eventos reservada al administrador.
+- Panel de administración con revisión de cuentas, reportes, publicaciones y categorías.
+- Resumen Balanced Scorecard con metas del proyecto y avances de demostración.
+- Temas de color, idioma parcial, tamaño de letra y controles adaptados a escritorio y móvil.
 
-## Responsive
+## Recorridos de demostración
 
-- **Escritorio:** menú de navegación completo en la parte superior.
-- **Móvil (≤680px):** el menú superior se colapsa en un botón de hamburguesa, y aparece una
-  barra inferior fija con accesos rápidos (Inicio / Vender / Perfil).
+1. En Inicio, busca productos por nombre o abre **Filtros avanzados** para combinar categorías y vereda/sector.
+2. Abre una tarjeta para ver el detalle. El nombre del vendedor dentro del detalle abre su perfil público; **Volver** regresa al detalle anterior.
+3. Para probar la administración, inicia sesión con `admin@mail.com` y contraseña `admin`.
+4. Desde el panel admin, revisa las cuentas pendientes o publica eventos. En este mockup, cualquier inicio de sesión de usuario con correo y contraseña no vacíos marca esa cuenta como verificada.
 
-## Decisiones de diseño (según retroalimentación del proyecto)
+## Datos y persistencia
 
-- Paleta de colores reducida y consistente (verde + dorado) para evitar saturación visual.
-- Filtros de búsqueda ubicados junto a la barra de búsqueda, no dispersos en la pantalla.
-- Botón de ayuda con texto explícito ("? Ayuda") en vez de un ícono ambiguo.
-- Registro con tipo y número de documento, y confirmación de contraseña.
-- Sin carrito de compras ni pasarela de pagos — fuera del alcance del proyecto (ver limitaciones
-  en el documento de la fase 1).
+Los productos, vendedores, ubicaciones de ejemplo, cuentas iniciales y valores del BSC son datos demostrativos; las ubicaciones asociadas a los productos no representan una verificación geográfica real.
 
-## Próximos pasos sugeridos
+La demostración guarda en `localStorage` preferencias, favoritos, calificaciones, perfiles y estados de verificación. Las publicaciones nuevas, los reportes y las categorías agregadas son estado temporal de la página y se reinician al recargar. No se guardan contraseñas ni se valida identidad real.
 
-- Reemplazar las imágenes de Unsplash por fotografías reales de los emprendedores.
-- Conectar los formularios a un backend real (por ahora son simulados con `toast()`).
-- Ajustar contenido y textos según nueva retroalimentación de usuarios.
+## Indicadores BSC
+
+El panel muestra las metas compartidas para el proyecto: 50 productores al año, 70 % de satisfacción, máximo 10 minutos para publicar y 4 capacitaciones al año. Los avances actuales (32 productores, 76 %, 8 minutos y 3 de 4 capacitaciones) son valores de demostración definidos en `INDICADORES_BSC` dentro de `js/app.js`; no son mediciones reales ni se calculan a partir del catálogo.
+
+## Limitaciones
+
+- Inicio de sesión, aprobación, reportes y administración son simulaciones cliente; no sustituyen autenticación ni permisos de servidor.
+- Los botones de WhatsApp y llamada solo muestran un aviso; no contactan números reales.
+- Imágenes y fuentes se cargan desde sitios externos y pueden cambiar o dejar de estar disponibles.
+- El estado temporal y `localStorage` pertenecen al navegador actual; no hay sincronización entre usuarios o dispositivos.
+
+## Mantenimiento
+
+- `js/app.js`: datos de muestra (`UBICACIONES`, `productos`, `CATEGORIAS`), indicadores (`INDICADORES_BSC`), rutas y lógica de interacción.
+- `css/styles.css`: variables de tema, estilos de componentes y reglas responsive.
+- `index.html`: estructura semántica de pantallas, formularios y navegación.

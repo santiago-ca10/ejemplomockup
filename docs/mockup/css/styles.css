@@ -145,6 +145,13 @@ main{max-width:1080px; margin:0 auto; padding:26px 20px 60px;}
 @media (max-width:640px){.detail{grid-template-columns:1fr;}}
 .detail img{width:100%; border-radius:16px; object-fit:cover; height:280px; background:var(--line);}
 .seller-box{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px; display:flex; gap:12px; align-items:center; margin:16px 0;}
+.seller-profile-link{min-height:0; padding:0; border:0; background:none; color:var(--ink); text-align:left; font:inherit; font-weight:700; cursor:pointer;}
+.seller-profile-link:hover,.seller-profile-link:focus-visible{color:var(--primary); text-decoration:underline; text-underline-offset:3px;}
+.seller-public-header{display:flex; align-items:center; gap:14px; margin:8px 0 24px;}
+.seller-public-header .avatar{width:60px; height:60px; font-size:1.25rem;}
+.seller-public-header h2{font-size:1.3rem; overflow-wrap:anywhere;}
+.seller-public-header p{margin:4px 0 0; color:var(--ink-soft); font-size:.88rem;}
+.seller-public-eyebrow{font-size:.74rem !important; font-weight:700; text-transform:uppercase;}
 .avatar{width:44px; height:44px; border-radius:50%; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; flex:0 0 auto;}
 .contact-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;}
 .seller-rating{font-size:.86rem; font-weight:700; color:var(--rating); margin-top:2px;}
@@ -173,7 +180,6 @@ main{max-width:1080px; margin:0 auto; padding:26px 20px 60px;}
   display:flex; flex-direction:column; gap:6px; min-height:88px;}
 .admin-card:hover{border-color:var(--primary);}
 .admin-card-n{font-size:1.6rem; font-weight:800; color:var(--primary-deep); font-family:'Fraunces',serif;}
-.admin-stat{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 20px; min-width:140px;}
 .bsc-section{margin:8px 0 30px;}
 .bsc-heading{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:14px;}
 .bsc-heading h4,.admin-tools-title{margin:0; font-size:1rem; color:var(--ink);}
@@ -261,12 +267,6 @@ main{max-width:1080px; margin:0 auto; padding:26px 20px 60px;}
 .publish-head h3{font-size:1.15rem;}
 .btn-save{background:var(--success); color:#fff; border-radius:999px; padding:11px 22px; font:800 .85rem 'Public Sans'; letter-spacing:.02em; cursor:pointer; min-height:42px;}
 .btn-save:hover{filter:brightness(1.08);}
-.photo-upload{display:block; cursor:pointer;}
-.photo-placeholder{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
-  height:180px; border:2px dashed var(--line); border-radius:14px; background:var(--bg); color:var(--ink-soft);
-  font:600 .85rem 'Public Sans'; text-align:center; padding:14px; overflow:hidden; transition:border-color .15s ease;}
-.photo-placeholder svg{width:34px; height:34px;}
-.photo-upload:hover .photo-placeholder, .photo-upload:focus-visible .photo-placeholder{border-color:var(--primary); color:var(--primary);}
 .mercader-line{margin:16px 0 18px; font-size:.92rem; color:var(--ink-soft);}
 .mercader-line strong{color:var(--ink);}
 .field-editable{position:relative;}
@@ -295,11 +295,6 @@ main{max-width:1080px; margin:0 auto; padding:26px 20px 60px;}
   color:var(--ink-soft); cursor:pointer;}
 .photo-slot.add:hover, .photo-slot.add:focus-visible{border-color:var(--primary); color:var(--primary);}
 .photo-slot.add svg{width:26px; height:26px;}
-
-/* Galería de fotos en el detalle del producto */
-.thumb-row{display:flex; gap:8px; margin-top:10px; overflow-x:auto;}
-.thumb{width:58px; height:58px; object-fit:cover; border-radius:8px; cursor:pointer; border:2px solid transparent; opacity:.65; flex:0 0 auto;}
-.thumb.active{border-color:var(--primary); opacity:1;}
 
 /* Animación de entrada al abrir Configuración */
 @keyframes fadeSlideUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
